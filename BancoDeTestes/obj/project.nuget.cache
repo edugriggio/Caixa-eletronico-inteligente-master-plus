@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dl9c2HMxNBimwzD/58ZNlwTM7HzMb5pJ+DifODkd3pV67kEVIsDZ8FLybjVl3/pKEvd2Az66HZ9ocpzJ3vUX/g==",
+  "dgSpecHash": "5D0ffnZPf1ElRT3dRpp2uPkVF8LQZG1IdBQ++HgHlY9L2ftR63e82WRmmp+9KP+ZqrXNiBZUShbbAN4v6DWHFQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
+  "projectFilePath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rafael\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
