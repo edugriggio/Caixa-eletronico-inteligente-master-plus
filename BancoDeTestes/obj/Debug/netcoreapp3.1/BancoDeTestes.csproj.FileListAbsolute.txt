@@ -92,3 +92,6 @@ C:\Users\Rafael\Source\Repos\Caixa-eletronico-inteligente-master-plus\BancoDeTes
 C:\Users\Rafael\Source\Repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\obj\Debug\netcoreapp3.1\BancoDeTestes.dll
 C:\Users\Rafael\Source\Repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\obj\Debug\netcoreapp3.1\BancoDeTestes.pdb
 C:\Users\Rafael\Source\Repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\obj\Debug\netcoreapp3.1\BancoDeTestes.genruntimeconfig.cache
+C:\Users\Rafael\Source\Repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\bin\Debug\netcoreapp3.1\CxMasterPlus.exe
+C:\Users\Rafael\Source\Repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\bin\Debug\netcoreapp3.1\CxMasterPlus.dll
+C:\Users\Rafael\Source\Repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\bin\Debug\netcoreapp3.1\CxMasterPlus.pdb

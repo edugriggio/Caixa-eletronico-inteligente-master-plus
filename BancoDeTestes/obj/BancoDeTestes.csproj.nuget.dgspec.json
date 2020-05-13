@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {}
+    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {
+    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
+        "projectUniqueName": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
         "projectName": "BancoDeTestes",
-        "projectPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
+        "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
         "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\obj\\",
+        "outputPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,7 +26,11 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+                "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -55,6 +59,58 @@
               "version": "[1.2.0, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "projectName": "CxMasterPlus",
+        "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
           "imports": [
             "net461",
             "net462",

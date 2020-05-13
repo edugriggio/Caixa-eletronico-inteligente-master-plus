@@ -48,7 +48,7 @@ namespace CxMasterPlus
             }
         }
 
-        private double solicitacaoDeDeposito()
+        public double solicitacaoDeDeposito()
         {
             int input;
             Tela tela = getTela();

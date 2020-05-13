@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "BancoDeTestes/1.0.0": {
         "dependencies": {
+          "CxMasterPlus": "1.0.0",
           "MSTest.TestAdapter": "2.1.0",
           "MSTest.TestFramework": "2.1.0",
           "Microsoft.NET.Test.Sdk": "16.5.0",
@@ -1069,6 +1070,11 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "CxMasterPlus/1.0.0": {
+        "runtime": {
+          "CxMasterPlus.dll": {}
+        }
       }
     }
   },
@@ -1686,6 +1692,11 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "CxMasterPlus/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

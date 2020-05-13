@@ -3,7 +3,7 @@
 namespace BancoDeTestes
 {
     [TestClass]
-    public class Extrato
+    public class ExtratoTeste
     {
         [TestMethod]
         public void TestMethod1()
