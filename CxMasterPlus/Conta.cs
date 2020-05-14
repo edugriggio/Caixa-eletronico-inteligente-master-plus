@@ -13,6 +13,7 @@ namespace CxMasterPlus
         private double limiteDiario = 0;
         private double limiteFimDeSemana = 0;
         private int tipoConta;
+        private List<Transacao> historicoTransacoes;
 
         public Conta(int acc, int password, double vlrDisponivel, int tipoConta)
         {
@@ -20,6 +21,7 @@ namespace CxMasterPlus
             numeroConta = acc;
             senha = password;
             valorDisponivel = vlrDisponivel;
+            historicoTransacoes = new List<Transacao>();
             switch (tipoConta)
             {
                 case 1:
@@ -50,11 +52,13 @@ namespace CxMasterPlus
         public void CreditarValor(double valor)
         {
             valorDisponivel += valor;
+            GravarTransacao(DateTime.Now, "Depósito", valor);
         }
 
         public void DebitarValor(double valor)
         {
             valorDisponivel -= valor;
+            GravarTransacao(DateTime.Now, "Saque", valor);
         }
 
         public int NumeroConta()
@@ -89,6 +93,16 @@ namespace CxMasterPlus
             {
                 limiteDiario -= valor;
             }
+        }
+
+        public void GravarTransacao(DateTime diaTransacao, string operacao, double valor)
+        {
+            historicoTransacoes.Add(new Transacao(diaTransacao, operacao, valor));
+        }
+
+        public List<Transacao> LerTransacoes()
+        {
+            return historicoTransacoes;
         }
     }
 }

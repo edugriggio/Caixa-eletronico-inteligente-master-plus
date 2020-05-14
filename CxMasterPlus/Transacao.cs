@@ -4,41 +4,21 @@ using System.Text;
 
 namespace CxMasterPlus
 {
-    public abstract class Transacao
+    public class Transacao
     {
-        private int nrConta;
-        private BaseDeDados baseDeDados;
-        private Tela tela;
-        private CompartimentoDeSaque compartimentoDeSaque;
+        private DateTime dataTransacao;
+        private string operacao;
+        private double valor;
 
-        public Transacao(int conta, BaseDeDados dados, Tela tela, CompartimentoDeSaque compartimentoDeSaque)
+        public Transacao(DateTime dataTransacao, string operacao, double valor)
         {
-            this.nrConta = conta;
-            this.baseDeDados = dados;
-            this.tela = tela;
-            this.compartimentoDeSaque = compartimentoDeSaque;
+            this.dataTransacao = dataTransacao;
+            this.operacao = operacao;
+            this.valor = valor;
         }
 
-        public int getNrConta()
-        {
-            return nrConta;
-        }
-
-        public Tela getTela()
-        {
-            return tela;
-        }
-
-        public BaseDeDados getBaseDeDados()
-        {
-            return baseDeDados;
-        }
-
-        public CompartimentoDeSaque getCompartimentoDeSaque()
-        {
-            return compartimentoDeSaque;
-        }
-
-        abstract public void execute();
+        public DateTime DataTransacao { get => dataTransacao; }
+        public string Operacao { get => operacao; }
+        public double Valor { get => valor; }
     }
 }

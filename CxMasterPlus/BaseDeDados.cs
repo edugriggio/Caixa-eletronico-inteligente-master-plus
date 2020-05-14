@@ -8,7 +8,6 @@ namespace CxMasterPlus
 
     public class BaseDeDados
     {
-
         private Conta[] contas;
 
         public BaseDeDados()
@@ -17,6 +16,10 @@ namespace CxMasterPlus
             contas[0] = new Conta(9999, 12345, 300, 1);
             contas[1] = new Conta(8888, 12345, 1000, 2);
             contas[2] = new Conta(7777, 12345, 1000, 3);
+
+            contas[0].GravarTransacao(DateTime.Now.AddDays(-30), "Saque", 200);
+            contas[0].GravarTransacao(DateTime.Now.AddDays(-15), "Depósito", 500);
+            contas[0].GravarTransacao(DateTime.Now.AddDays(-7), "Saque", 300);
         }
 
         private Conta retornaConta(int nrConta)
@@ -66,7 +69,12 @@ namespace CxMasterPlus
         {
             return this.retornaConta(nrConta).TipoConta();
         }
-    }
 
+        public List<Transacao> getHistoricoTransacoes(int nrConta)
+        {
+            return retornaConta(nrConta).LerTransacoes();
+        }
+
+    }
 
 }

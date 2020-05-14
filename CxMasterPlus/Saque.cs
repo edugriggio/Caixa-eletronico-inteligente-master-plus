@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CxMasterPlus
 {
-    public class Saque : Transacao
+    public class Saque : Operacao
     {
         private int qtd;
         private CompartimentoDeSaque compartimentoDeSaque;
@@ -22,10 +22,8 @@ namespace CxMasterPlus
             bool dinheiroEntregue = false;
             double saldoDisponivel;
 
-
             BaseDeDados baseDeDados = getBaseDeDados();
             Tela tela = getTela();
-
 
             do
             {

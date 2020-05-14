@@ -4,12 +4,12 @@ using System.Text;
 
 namespace CxMasterPlus
 {
-    public class Deposito : Transacao
+    public class Deposito : Operacao
     {
-        private double qtd;
+        private int qtd;
         private static readonly int CANCELADO = 0;
-        private double tipoDeposito = 0;
-        private double valorDeposito = 0;
+        private int tipoDeposito = 0;
+        private int valorDeposito = 0;
 
         public Deposito(int conta, BaseDeDados dados, Tela tela, CompartimentoDeSaque compartimentoDeSaque) : base(conta, dados, tela, compartimentoDeSaque)
         {
@@ -37,7 +37,6 @@ namespace CxMasterPlus
                 {
                     getCompartimentoDeSaque().adicionarNotas(qtd);
                 }
-
             }
             else
             {
@@ -48,7 +47,7 @@ namespace CxMasterPlus
             }
         }
 
-        public double solicitacaoDeDeposito()
+        private int solicitacaoDeDeposito()
         {
             int input;
             Tela tela = getTela();
@@ -72,7 +71,7 @@ namespace CxMasterPlus
             Console.Clear();
             if (validador.validarUsuario(tela, getNrConta(), getBaseDeDados(), input))
             {
-                return Convert.ToDouble(input / 100);
+                return input;
             }
             else
             {
@@ -80,7 +79,7 @@ namespace CxMasterPlus
             }
         }
 
-        private double menudeposito()
+        private int menudeposito()
         {
             int input;
             Tela tela = getTela();

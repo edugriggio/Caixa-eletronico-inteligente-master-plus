@@ -93,7 +93,7 @@ namespace CxMasterPlus
                     case 1:
                     case 2:
                     case 3:
-                        criarTransacao(selecao);
+                        criarOperacao(selecao);
                         break;
                     case 4:
                         Console.Clear();
@@ -113,7 +113,7 @@ namespace CxMasterPlus
         {
             Console.Clear();
             tela.imprimirMensagem("Menu Principal:");
-            tela.imprimirMensagem("1 - Ver saldo(Método criado para testar a efetividade das transações, substituir pelo método de consulta de extrato.)");
+            tela.imprimirMensagem("1 - Consulta de Extrato");
             tela.imprimirMensagem("2 - Sacar");
             tela.imprimirMensagem("3 - Depositar");
             tela.imprimirMensagem("4 - Sair\n");
@@ -128,14 +128,14 @@ namespace CxMasterPlus
             }
         }
 
-        private Transacao criarTransacao(int x)
+        private Operacao criarOperacao(int x)
         {
-            Transacao opcao = null;
+            Operacao opcao = null;
 
             switch (x)
             {
                 case 1:
-                    opcao = new ConsultaSaldo(contaLogada, baseDeDados, tela, compartimentoDeSaque);
+                    opcao = new ConsultaExtrato(contaLogada, baseDeDados, tela, compartimentoDeSaque);
                     break;
                 case 2:
                     opcao = new Saque(contaLogada, baseDeDados, tela, compartimentoDeSaque);
