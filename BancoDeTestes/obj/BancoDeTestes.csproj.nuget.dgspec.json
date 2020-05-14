@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {}
+    "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {
+    "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
+        "projectUniqueName": "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
         "projectName": "BancoDeTestes",
-        "projectPath": "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
-        "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\obj\\",
+        "projectPath": "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
+        "packagesPath": "C:\\Users\\bcmar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bcmar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
-                "projectPath": "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj"
+              "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+                "projectPath": "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj"
               }
             }
           }
@@ -77,24 +74,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+    "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "projectUniqueName": "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
         "projectName": "CxMasterPlus",
-        "projectPath": "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
-        "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucas\\Source\\Repos\\edugriggio\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\obj\\",
+        "projectPath": "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "packagesPath": "C:\\Users\\bcmar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bcmar\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bcmar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -132,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

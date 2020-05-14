@@ -21,10 +21,25 @@ namespace CxMasterPlus
 
             List<Transacao> historicoTransacoes = baseDeDados.getHistoricoTransacoes(getNrConta());
 
-            Console.Clear();
-
-            tela.imprimirMensagem("Digite o intervalo de dias que deseja visualizar do seu extrato (0 para ver todo extrato): ");
-            int intervaloExtrato = Convert.ToInt32(Console.ReadLine());
+            int intervaloExtrato = 0;
+            bool validaIntervalo = false;
+            
+            while (!validaIntervalo) {
+                Console.Clear();
+                tela.imprimirMensagem("Digite o intervalo de dias que deseja visualizar do seu extrato (0 para ver todo extrato): ");
+                try
+                {
+                    intervaloExtrato = Convert.ToInt32(Console.ReadLine());
+                    validaIntervalo = true;
+                }
+                catch (Exception)
+                {
+                    Console.Clear();
+                    tela.imprimirMensagem("O valor digitado não é válido.");
+                    Console.ReadKey();
+                }
+            }
+            
 
             tela.imprimirMensagem("Informações de saldo:");
             tela.imprimirMensagem("Saldo disponível: " + tela.converterValor(valorDisponivel));
