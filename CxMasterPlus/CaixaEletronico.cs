@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace CxMasterPlus
 {
@@ -87,13 +84,17 @@ namespace CxMasterPlus
             {
 
                 int selecao = exibirMenuPrincipal();
-
+                
                 switch (selecao)
                 {
                     case 1:
+                        criarOperacao(1);
+                        break;
                     case 2:
+                        criarOperacao(2);
+                        break;
                     case 3:
-                        criarOperacao(selecao);
+                        criarOperacao(3);
                         break;
                     case 4:
                         Console.Clear();
@@ -109,6 +110,25 @@ namespace CxMasterPlus
                 }
             }
         }
+
+        private void criarOperacao(int x)
+        {
+            MenuOperacoes operacao = new MenuOperacoes();
+
+            switch (x)
+            {
+                case 1:
+                    operacao.MenuExtrato(contaLogada, tela, baseDeDados);
+                    break;
+                case 2:
+                    operacao.MenuSaque(contaLogada, tela, baseDeDados, compartimentoDeSaque);
+                    break;
+                case 3:
+                    operacao.MenuDeposito(contaLogada, tela, baseDeDados, compartimentoDeSaque);
+                    break;
+            }
+        }
+
         private int exibirMenuPrincipal()
         {
             Console.Clear();
@@ -126,25 +146,6 @@ namespace CxMasterPlus
             {
                 return 0;
             }
-        }
-
-        private Operacao criarOperacao(int x)
-        {
-            Operacao opcao = null;
-
-            switch (x)
-            {
-                case 1:
-                    opcao = new ConsultaExtrato(contaLogada, baseDeDados, tela, compartimentoDeSaque);
-                    break;
-                case 2:
-                    opcao = new Saque(contaLogada, baseDeDados, tela, compartimentoDeSaque);
-                    break;
-                case 3:
-                    opcao = new Deposito(contaLogada, baseDeDados, tela, compartimentoDeSaque);
-                    break;
-            }
-            return opcao;
         }
     }
 }

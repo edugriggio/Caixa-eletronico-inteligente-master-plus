@@ -11,42 +11,33 @@ namespace CxMasterPlus
         private bool usuarioAutenticado = false;
         private int tentativas = 3;
         private int senha;
-        public Boolean validarUsuario(Tela tela, int conta, BaseDeDados baseDeDados, int opcao)
+        public Boolean validarUsuario(Tela tela, int conta, BaseDeDados baseDeDados)
         {
             while (!usuarioAutenticado && tentativas > 0)
             {
-                if (opcao != 0)
+                tela.imprimirMensagem("Por favor, digite sua senha: ");
+                try
                 {
-                    tela.imprimirMensagem("Por favor, digite sua senha: ");
-                    try
-                    {
-                        senha = Convert.ToInt32(Console.ReadLine());
-                    }
-                    catch (Exception)
-                    {
-                        senha = 0;
-                    }
-                    usuarioAutenticado = baseDeDados.autenticarUsuario(conta, senha);
-                    tentativas--;
-                    if (!usuarioAutenticado && tentativas > 0)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Senha Inválida. Você possui mais " + tentativas + " tentativas.");
-                    }
-                    else if (!usuarioAutenticado && tentativas == 0)
-                    {
-                        Console.Clear();
-                        tela.imprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
-                        Console.ReadKey();
-                        Console.Clear();
-                        return false;
-                    }
+                    senha = Convert.ToInt32(Console.ReadLine());
                 }
-                else
+                catch (Exception)
                 {
-                    return usuarioAutenticado;
+                    senha = 0;
+                }
+                usuarioAutenticado = baseDeDados.autenticarUsuario(conta, senha);
+                tentativas--;
+                if (!usuarioAutenticado && tentativas > 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Senha Inválida. Você possui mais " + tentativas + " tentativas.");
+                }
+                else if (!usuarioAutenticado && tentativas == 0)
+                {
+                    Console.Clear();
+                    return false;
                 }
             }
+            Console.Clear();
             return usuarioAutenticado;
         }
     }
