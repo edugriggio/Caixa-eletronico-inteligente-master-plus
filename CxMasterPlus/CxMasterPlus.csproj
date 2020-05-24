@@ -5,4 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="FrameworkProjeto">
+      <HintPath>..\FrameworkProjeto\bin\Debug\FrameworkProjeto.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

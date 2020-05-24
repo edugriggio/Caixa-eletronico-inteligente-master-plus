@@ -289,3 +289,5 @@ C:\Users\bcmar\source\repos\Caixa-eletronico-inteligente-master-plus\BancoDeTest
 C:\Users\bcmar\source\repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\obj\Debug\netcoreapp3.1\BancoDeTestes.dll
 C:\Users\bcmar\source\repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\obj\Debug\netcoreapp3.1\BancoDeTestes.pdb
 C:\Users\bcmar\source\repos\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\obj\Debug\netcoreapp3.1\BancoDeTestes.genruntimeconfig.cache
+C:\Users\lucas\Source\Repos\edugriggio\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\bin\Debug\netcoreapp3.1\FrameworkProjeto.dll
+C:\Users\lucas\Source\Repos\edugriggio\Caixa-eletronico-inteligente-master-plus\BancoDeTestes\bin\Debug\netcoreapp3.1\FrameworkProjeto.pdb

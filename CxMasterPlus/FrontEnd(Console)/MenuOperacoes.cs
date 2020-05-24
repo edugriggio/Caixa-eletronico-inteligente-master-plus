@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FrameworkProjeto;
 
 namespace CxMasterPlus
 {
@@ -188,7 +189,16 @@ namespace CxMasterPlus
                 try
                 {
                     intervaloExtrato = Convert.ToInt32(Console.ReadLine());
-                    validaIntervalo = true;
+                    if (intervaloExtrato < 0)
+                    {
+                        Console.Clear();
+                        tela.imprimirMensagem("O valor não pode ser negativo.");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        validaIntervalo = true;
+                    }
                 }
                 catch (Exception)
                 {
@@ -200,7 +210,15 @@ namespace CxMasterPlus
 
             ConsultaExtrato consultaExtrato = new ConsultaExtrato();
             Console.Clear();
-            tela.imprimirMensagem(consultaExtrato.GerarExtrato(contaLogada, baseDeDados, tela, intervaloExtrato));
+
+            Retorno<Extrato> retExtrato = consultaExtrato.GerarExtrato(contaLogada, baseDeDados, tela, intervaloExtrato);
+            if (!retExtrato.Ok)
+            {
+                tela.imprimirMensagem(retExtrato.Mensagem.ToString());
+            }
+           
+            tela.ExibirExtrato(retExtrato.Dados);
+
             Console.ReadKey();
             Console.Clear();
         }

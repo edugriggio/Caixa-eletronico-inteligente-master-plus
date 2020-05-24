@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Soft\pxc\bin\Pxcoiexn.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A3911D6F-B976-4199-A356-5F96F08CD22A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FrameworkProjeto</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <ApplicationVersion>1.0.0.7</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FrameworkProjeto</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework">
+      <HintPath>lib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Excecao\Pxcoiexn_BancoDadosException.cs" />
+    <Compile Include="Excecao\Pxcoiexn_ViolacaoArquiteturalException.cs" />
+    <Compile Include="Excecao\Pxcoiexn_ViolacaoBDException.cs" />
+    <Compile Include="Mensagem\Pxcoiexn_CampoObrigatorioMensagem.cs" />
+    <Compile Include="Pxcoiexn_ConverteXml.cs" />
+    <Compile Include="Mensagem\Pxcoiexn_OperacaoRealizadaMensagem.cs" />
+    <Compile Include="Pxcoiexn_Aplicacao.cs" />
+    <Compile Include="Pxcoiexn_Formatador.cs" />
+    <Compile Include="Pxcoiexn_Infra.cs" />
+    <Compile Include="Pxcoiexn_Retorno.cs" />
+    <Compile Include="Pxcoiexn_RetornoT.cs" />
+    <Compile Include="Mensagem\Pxcoiexn_Mensagem.cs" />
+    <Compile Include="Excecao\Pxcoiexn_MensagemInvalidaException.cs" />
+    <Compile Include="Excecao\Pxcoiexn_MultiplosRegistrosException.cs" />
+    <Compile Include="Mensagem\Pxcoiexn_RegistroInexistenteMensagem.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

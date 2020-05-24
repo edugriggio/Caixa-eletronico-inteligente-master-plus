@@ -1,0 +1,7 @@
+C:\Users\lucas\source\repos\edugriggio\Caixa-eletronico-inteligente-master-plus\FrameworkProjeto\bin\Debug\FrameworkProjeto.dll
+C:\Users\lucas\source\repos\edugriggio\Caixa-eletronico-inteligente-master-plus\FrameworkProjeto\bin\Debug\FrameworkProjeto.pdb
+C:\Users\lucas\source\repos\edugriggio\Caixa-eletronico-inteligente-master-plus\FrameworkProjeto\bin\Debug\nunit.framework.dll
+C:\Users\lucas\source\repos\edugriggio\Caixa-eletronico-inteligente-master-plus\FrameworkProjeto\obj\Debug\FrameworkProjeto.csproj.CoreCompileInputs.cache
+C:\Users\lucas\source\repos\edugriggio\Caixa-eletronico-inteligente-master-plus\FrameworkProjeto\obj\Debug\FrameworkProjeto.csproj.CopyComplete
+C:\Users\lucas\source\repos\edugriggio\Caixa-eletronico-inteligente-master-plus\FrameworkProjeto\obj\Debug\FrameworkProjeto.dll
+C:\Users\lucas\source\repos\edugriggio\Caixa-eletronico-inteligente-master-plus\FrameworkProjeto\obj\Debug\FrameworkProjeto.pdb
