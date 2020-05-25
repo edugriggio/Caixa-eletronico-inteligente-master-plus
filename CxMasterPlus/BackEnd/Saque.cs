@@ -17,7 +17,7 @@ namespace CxMasterPlus
                     return "Valor excede o limite diário conforme o seu tipo de conta.";
                 }
 
-                saldoDisponivel = baseDeDados.retornaSaldoDisponivel(nrConta);
+                saldoDisponivel = baseDeDados.RetornaSaldoDisponivel(nrConta);
                 if (saldoDisponivel < 20)
                 {
                     return "Saldo disponível em conta é menor que a nota de menor valor disponível no caixa eletrônico.";
@@ -25,14 +25,14 @@ namespace CxMasterPlus
 
                 if (qtd < saldoDisponivel)
                 {
-                    if (compartimentoDeSaque.temSaldoSuficiente(qtd))
+                    if (compartimentoDeSaque.TemSaldoSuficiente(qtd))
                     {
                         if (baseDeDados.getLimiteDiario(nrConta, (date.DayOfWeek - 1).ToString()) >= qtd)
                         {
-                            baseDeDados.debitarValor(nrConta, qtd);
+                            baseDeDados.DebitarValor(nrConta, qtd);
 
-                            compartimentoDeSaque.dispensarDinheiro(qtd);
-                            baseDeDados.subtrairLimiteDiario(nrConta, qtd, (date.DayOfWeek - 1).ToString());
+                            compartimentoDeSaque.DispensarDinheiro(qtd);
+                            baseDeDados.SubtrairLimiteDiario(nrConta, qtd, (date.DayOfWeek - 1).ToString());
                             return "Transação realizada.\nPor favor, retire seu dinheiro.";
                         }
                         else

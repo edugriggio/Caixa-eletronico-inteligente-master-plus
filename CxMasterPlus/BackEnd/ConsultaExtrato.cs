@@ -30,7 +30,7 @@ namespace CxMasterPlus
                 }
                 #endregion
 
-                double valorDisponivel = baseDeDados.retornaSaldoDisponivel(nrConta);        
+                double valorDisponivel = baseDeDados.RetornaSaldoDisponivel(nrConta);        
                 #endregion
 
                 Extrato extrato = new Extrato(valorDisponivel, historicoTransacoes);

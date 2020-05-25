@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CxMasterPlus/1.0.0": {
+        "dependencies": {
+          "FrameworkProjeto": "1.0.0.7"
+        },
+        "runtime": {
+          "CxMasterPlus.dll": {}
+        }
+      },
+      "FrameworkProjeto/1.0.0.7": {
+        "runtime": {
+          "FrameworkProjeto.dll": {
+            "assemblyVersion": "1.0.0.7",
+            "fileVersion": "1.0.0.7"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CxMasterPlus/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FrameworkProjeto/1.0.0.7": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

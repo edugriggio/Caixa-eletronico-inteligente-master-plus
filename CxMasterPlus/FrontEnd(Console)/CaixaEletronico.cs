@@ -31,7 +31,7 @@ namespace CxMasterPlus
                 executarTransacao();
                 usuarioAutenticado = false;
                 contaLogada = 0;
-                tela.imprimirMensagem("Obrigado por utilizar o Caixa Master Plus. Até logo!");
+                tela.ImprimirMensagem("Obrigado por utilizar o Caixa Master Plus. Até logo!");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -41,7 +41,7 @@ namespace CxMasterPlus
         {
             int nrConta;
             int senha;
-            tela.imprimirMensagem("Por favor digite o número da sua conta: ");
+            tela.ImprimirMensagem("Por favor digite o número da sua conta: ");
             try
             {
                 nrConta = Convert.ToInt32(Console.ReadLine());
@@ -51,7 +51,7 @@ namespace CxMasterPlus
                 nrConta = 0;
             }
 
-            tela.imprimirMensagem("\nDigite sua senha: ");
+            tela.ImprimirMensagem("\nDigite sua senha: ");
             try
             {
                 senha = Convert.ToInt32(Console.ReadLine());
@@ -61,7 +61,7 @@ namespace CxMasterPlus
                 senha = 0;
             }
 
-            if (baseDeDados.autenticarUsuario(nrConta, senha))
+            if (baseDeDados.AutenticarUsuario(nrConta, senha))
             {
                 contaLogada = nrConta;
                 usuarioAutenticado = true;
@@ -70,7 +70,7 @@ namespace CxMasterPlus
             else
             {
                 Console.Clear();
-                tela.imprimirMensagem("Número da conta ou senha inválidos. Por Favor, tente novamente.");
+                tela.ImprimirMensagem("Número da conta ou senha inválidos. Por Favor, tente novamente.");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -97,13 +97,16 @@ namespace CxMasterPlus
                         criarOperacao(3);
                         break;
                     case 4:
+                        criarOperacao(4);
+                        break;
+                    case 5:
                         Console.Clear();
-                        tela.imprimirMensagem("Saindo do sistema...");
+                        tela.ImprimirMensagem("Saindo do sistema...");
                         usuarioDeslogado = true;
                         break;
                     default:
                         Console.Clear();
-                        tela.imprimirMensagem("Você não digitou uma opção válida. Tente novamente.");
+                        tela.ImprimirMensagem("Você não digitou uma opção válida. Tente novamente.");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -126,18 +129,22 @@ namespace CxMasterPlus
                 case 3:
                     operacao.MenuDeposito(contaLogada, tela, baseDeDados, compartimentoDeSaque);
                     break;
+                case 4:
+                    operacao.MenuEmprestimo(contaLogada, tela, baseDeDados);
+                    break;
             }
         }
 
         private int exibirMenuPrincipal()
         {
             Console.Clear();
-            tela.imprimirMensagem("Menu Principal:");
-            tela.imprimirMensagem("1 - Consulta de Extrato");
-            tela.imprimirMensagem("2 - Sacar");
-            tela.imprimirMensagem("3 - Depositar");
-            tela.imprimirMensagem("4 - Sair\n");
-            tela.imprimirMensagem("Escolha uma opção: ");
+            tela.ImprimirMensagem("Menu Principal:");
+            tela.ImprimirMensagem("1 - Consulta de Extrato");
+            tela.ImprimirMensagem("2 - Sacar");
+            tela.ImprimirMensagem("3 - Depositar");
+            tela.ImprimirMensagem("4 - Empréstimo");
+            tela.ImprimirMensagem("5 - Sair\n");
+            tela.ImprimirMensagem("Escolha uma opção: ");
             try
             {
                 return Convert.ToInt32(Console.ReadLine());

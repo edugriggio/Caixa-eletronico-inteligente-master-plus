@@ -7,7 +7,7 @@ namespace CxMasterPlus
 {
     public class Tela
     {
-        public void imprimirMensagem(String mensagem)
+        public void ImprimirMensagem(String mensagem)
         {
             Console.WriteLine(mensagem);
         }
@@ -43,7 +43,7 @@ namespace CxMasterPlus
                 }
             }
            
-            imprimirMensagem(sb.ToString());
+            ImprimirMensagem(sb.ToString());
         }
     }
 }

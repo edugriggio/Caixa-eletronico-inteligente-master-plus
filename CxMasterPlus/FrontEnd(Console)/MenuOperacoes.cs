@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
+using CxMasterPlus.BackEnd;
 using FrameworkProjeto;
 
 namespace CxMasterPlus
 {
     public class MenuOperacoes
     {
+        readonly Validadores validador = new Validadores();
+
         public void MenuSaque(int contaLogada, Tela tela, BaseDeDados baseDeDados, CompartimentoDeSaque compartimentoDeSaque)
         {
             int opcao = 0;
@@ -17,14 +21,14 @@ namespace CxMasterPlus
             while (opcao != 6)
             {
                 Console.Clear();
-                tela.imprimirMensagem("Menu de Saque:");
-                tela.imprimirMensagem("1 - R$20");
-                tela.imprimirMensagem("2 - R$50");
-                tela.imprimirMensagem("3 - R$100");
-                tela.imprimirMensagem("4 - R$200");
-                tela.imprimirMensagem("5 - R$500");
-                tela.imprimirMensagem("6 - Cancelar operação");
-                tela.imprimirMensagem("\nEscolha uma opção: ");
+                tela.ImprimirMensagem("Menu de Saque:");
+                tela.ImprimirMensagem("1 - R$20");
+                tela.ImprimirMensagem("2 - R$50");
+                tela.ImprimirMensagem("3 - R$100");
+                tela.ImprimirMensagem("4 - R$200");
+                tela.ImprimirMensagem("5 - R$500");
+                tela.ImprimirMensagem("6 - Cancelar operação");
+                tela.ImprimirMensagem("\nEscolha uma opção: ");
 
                 try
                 {
@@ -53,7 +57,7 @@ namespace CxMasterPlus
                         break;
                     default:
                         Console.Clear();
-                        tela.imprimirMensagem("Opção inválida. Tente novamente.");
+                        tela.ImprimirMensagem("Opção inválida. Tente novamente.");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -62,24 +66,24 @@ namespace CxMasterPlus
 
             if (input != 6)
             {
-                Validador validador = new Validador();
-                if (validador.validarUsuario(tela, contaLogada, baseDeDados))
+                Validadores validador = new Validadores();
+                if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
                 {
                     String mensagem = saque.EfetuarSaque(contaLogada, baseDeDados, input, compartimentoDeSaque);
-                    tela.imprimirMensagem(mensagem);
+                    tela.ImprimirMensagem(mensagem);
                     Console.ReadKey();
                 }
                 else
                 {
                     Console.Clear();
-                    tela.imprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
+                    tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
                     Console.ReadKey();
                     Console.Clear();
                 }
             }
             else
             {
-                tela.imprimirMensagem("Cancelando operação...");
+                tela.ImprimirMensagem("Cancelando operação...");
                 Console.ReadKey();
             }
 
@@ -91,10 +95,10 @@ namespace CxMasterPlus
             while (tipoDeposito == 0)
             {
                 Console.Clear();
-                tela.imprimirMensagem("Selecione o tipo de depósito: ");
-                tela.imprimirMensagem("1 - Cheque");
-                tela.imprimirMensagem("2 - Dinheiro");
-                tela.imprimirMensagem("3 - Cancelar operação");
+                tela.ImprimirMensagem("Selecione o tipo de depósito: ");
+                tela.ImprimirMensagem("1 - Cheque");
+                tela.ImprimirMensagem("2 - Dinheiro");
+                tela.ImprimirMensagem("3 - Cancelar operação");
 
                 try
                 {
@@ -111,7 +115,7 @@ namespace CxMasterPlus
                         if (baseDeDados.getTipoConta(contaLogada).Equals(1))
                         {
                             Console.Clear();
-                            tela.imprimirMensagem("Contas universitárias não podem efetuar depósito em cheque.");
+                            tela.ImprimirMensagem("Contas universitárias não podem efetuar depósito em cheque.");
                             Console.ReadKey();
                             Console.Clear();
                             tipoDeposito = 0;
@@ -129,48 +133,39 @@ namespace CxMasterPlus
                         break;
                     default:
                         Console.Clear();
-                        tela.imprimirMensagem("Opção Inválida. Tente novamente.");
+                        tela.ImprimirMensagem("Opção Inválida. Tente novamente.");
                         Console.ReadKey();
                         Console.Clear();
                         break;
                 }
             }
+
             if (tipoDeposito != 3)
             {
                 Console.Clear();
-                tela.imprimirMensagem("Por favor, insira uma quantia em R$ (ou 0 para cancelar): ");
-                try
-                {
-                    input = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (Exception)
-                {
-                    Console.Clear();
-                    tela.imprimirMensagem("O valor digitado é inválido. Sua Transação será cancelada.");
-                    Console.ReadKey();
-                    Console.Clear();
-                    input = 0;
-                }
+                tela.ImprimirMensagem("Por favor, insira uma quantia em R$ (ou 0 para cancelar): ");
+                input = validador.ValidarInputMenu(tela, Console.ReadLine());
+
                 if (input != 0)
                 {
-                    Validador validador = new Validador();
+                    Validadores validador = new Validadores();
                     Console.Clear();
-                    if (validador.validarUsuario(tela, contaLogada, baseDeDados))
+                    if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
                     {
-                        tela.imprimirMensagem("Por favor, insira um envelope contendo " + tela.converterValor(input) + ".");
+                        tela.ImprimirMensagem("Por favor, insira um envelope contendo " + tela.converterValor(input) + ".");
                         Console.ReadKey();
                         Console.Clear();
                         Deposito deposito = new Deposito();
                         Console.Clear();
-                        String retornoDeposito = deposito.realizarDeposito(contaLogada, baseDeDados, compartimentoDeSaque, tipoDeposito, input);
+                        String retornoDeposito = deposito.RealizarDeposito(contaLogada, baseDeDados, compartimentoDeSaque, tipoDeposito, input);
                         Console.Clear();
-                        tela.imprimirMensagem(retornoDeposito);
+                        tela.ImprimirMensagem(retornoDeposito);
                         Console.ReadKey();
                     }
                     else
                     {
                         Console.Clear();
-                        tela.imprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
+                        tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
                         Console.ReadKey();
                         Console.Clear();
                     }
@@ -185,14 +180,14 @@ namespace CxMasterPlus
             while (!validaIntervalo)
             {
                 Console.Clear();
-                tela.imprimirMensagem("Digite o intervalo de dias que deseja visualizar do seu extrato (0 para ver todo extrato): ");
+                tela.ImprimirMensagem("Digite o intervalo de dias que deseja visualizar do seu extrato (0 para ver todo extrato): ");
                 try
                 {
                     intervaloExtrato = Convert.ToInt32(Console.ReadLine());
                     if (intervaloExtrato < 0)
                     {
                         Console.Clear();
-                        tela.imprimirMensagem("O valor não pode ser negativo.");
+                        tela.ImprimirMensagem("O valor não pode ser negativo.");
                         Console.ReadKey();
                     }
                     else
@@ -203,7 +198,7 @@ namespace CxMasterPlus
                 catch (Exception)
                 {
                     Console.Clear();
-                    tela.imprimirMensagem("O valor digitado é inválido.");
+                    tela.ImprimirMensagem("O valor digitado é inválido.");
                     Console.ReadKey();
                 }
             }
@@ -214,13 +209,124 @@ namespace CxMasterPlus
             Retorno<Extrato> retExtrato = consultaExtrato.GerarExtrato(contaLogada, baseDeDados, tela, intervaloExtrato);
             if (!retExtrato.Ok)
             {
-                tela.imprimirMensagem(retExtrato.Mensagem.ToString());
+                tela.ImprimirMensagem(retExtrato.Mensagem.ToString());
             }
-           
+
             tela.ExibirExtrato(retExtrato.Dados);
 
             Console.ReadKey();
             Console.Clear();
+        }
+        public void MenuEmprestimo(int contaLogada, Tela tela, BaseDeDados baseDeDados)
+        {
+            int inputMenu = 0;
+
+            #region Menu Empréstimo
+
+            while (inputMenu == 0)
+            {
+                Console.Clear();
+                tela.ImprimirMensagem("Selecione a opção desejada: ");
+                tela.ImprimirMensagem("1 - Solicitar Empréstimo");
+                tela.ImprimirMensagem("2 - Pagar Parcela do Empréstimo");
+                tela.ImprimirMensagem("3 - Cancelar operação");
+
+                try
+                {
+                    inputMenu = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    inputMenu = 0;
+                }
+
+                switch (inputMenu)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        break;
+                    default:
+                        Console.Clear();
+                        tela.ImprimirMensagem("Opção Inválida. Tente novamente.");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                }
+            }
+            #endregion
+
+            #region Solicitar Empréstimo
+            double valorMaxEmprestimo;
+            double valorEmprestimo;
+            double taxaJuros = 5;
+
+            if (inputMenu == 1)
+            {
+                Emprestimo svEmprestimo = new Emprestimo();
+                valorMaxEmprestimo = baseDeDados.getVlrDispEmprestimo(contaLogada);
+
+                Console.Clear();
+                tela.ImprimirMensagem(string.Concat("Valor disponível para empréstimo: ", valorMaxEmprestimo.ToString("C")));
+                tela.ImprimirMensagem("Taxa de juros: 5%");
+                tela.ImprimirMensagem("Por favor, insira uma quantia desejada em R$ (ou 0 para cancelar): ");
+                valorEmprestimo = validador.ValidarInputMenu(tela, Console.ReadLine());
+
+                if (valorEmprestimo != 0)
+                {
+                    #region RN: Valida se valor do empréstimo é permitido
+                    if (!svEmprestimo.VeririficaValorEmprestimo(valorEmprestimo, valorMaxEmprestimo))
+                    {
+                        Console.Clear();
+                        tela.ImprimirMensagem(string.Concat("O valor do empréstimo deve ser positivo e menor que ", valorMaxEmprestimo.ToString("C"), ". A transação será cancelada."));
+                        Console.ReadKey();
+                        Console.Clear();
+                        valorEmprestimo = 0;
+                    }
+                    #endregion
+
+                    tela.ImprimirMensagem("\nPor favor, insira um prazo para o empréstimo (prazo máximo de 12 meses): ");
+                    int nrParcelas = validador.ValidarInputMenu(tela, Console.ReadLine());
+
+                    if (nrParcelas > 0)
+                    {
+                        #region RN: Valida prazo do empréstimo
+                        if (!svEmprestimo.VeririficaPrazoEmprestimo(nrParcelas))
+                        {
+                            Console.Clear();
+                            tela.ImprimirMensagem(string.Concat("O prazo deve ser positivo de no máximo 12 meses. A transação será cancelada."));
+                            Console.ReadKey();
+                            Console.Clear();
+                            valorEmprestimo = 0;
+                        }
+                        #endregion
+
+                        Console.Clear();
+                        if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
+                        {
+                            string retornoEmprestimo = svEmprestimo.RealizarEmprestimo(tela, contaLogada, baseDeDados, valorEmprestimo, taxaJuros, nrParcelas);
+                            Console.Clear();
+                            tela.ImprimirMensagem(retornoEmprestimo);
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Pagamento das Parcelas
+            if (inputMenu == 2)
+            {
+                //TODO: Pagamento das parcelas do empréstimo
+            }
+            #endregion
         }
     }
 }

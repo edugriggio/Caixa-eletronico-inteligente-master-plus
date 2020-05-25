@@ -6,21 +6,24 @@ namespace CxMasterPlus
 {
     public class Deposito
     {
-        public String realizarDeposito(int nrConta, BaseDeDados baseDeDados, CompartimentoDeSaque compartimentoDeSaque, int tipoDeposito, int qtd)
+        public String RealizarDeposito(int nrConta, BaseDeDados baseDeDados, CompartimentoDeSaque compartimentoDeSaque, int tipoDeposito, int qtd)
         {
             try
             {
                 int tipoConta = baseDeDados.getTipoConta(nrConta);
+
+                //Verifica tipo de conta
                 if (tipoConta == 1 && tipoDeposito == 1)
                 {
                     return "Contas universitárias não podem efetuar depósito em cheque.";
                 }
                 if (tipoDeposito == 1 || tipoDeposito == 2)
                 {
-                    baseDeDados.creditarValor(nrConta, qtd);
+                    //Credita valor na conta
+                    baseDeDados.CreditarValor(nrConta, qtd, "Depósito");
                     if (tipoDeposito == 2)
                     {
-                        compartimentoDeSaque.adicionarNotas(qtd);
+                        compartimentoDeSaque.AdicionarNotas(qtd);
                     }
                     return "Transação Efetivada.";
                 }
