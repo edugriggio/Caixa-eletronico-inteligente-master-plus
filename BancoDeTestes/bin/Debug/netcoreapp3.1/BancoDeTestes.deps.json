@@ -1075,6 +1075,14 @@
         "runtime": {
           "CxMasterPlus.dll": {}
         }
+      },
+      "FrameworkProjeto/1.0.0.7": {
+        "runtime": {
+          "FrameworkProjeto.dll": {
+            "assemblyVersion": "1.0.0.7",
+            "fileVersion": "1.0.0.7"
+          }
+        }
       }
     }
   },
@@ -1695,6 +1703,11 @@
     },
     "CxMasterPlus/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FrameworkProjeto/1.0.0.7": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

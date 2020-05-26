@@ -17,7 +17,7 @@ namespace CxMasterPlus
                 {
                     return "Contas universitárias não podem efetuar depósito em cheque.";
                 }
-                if (tipoDeposito == 1 || tipoDeposito == 2)
+                if (tipoDeposito == 1 && qtd > 0 || tipoDeposito == 2 && qtd > 0)
                 {
                     //Credita valor na conta
                     baseDeDados.CreditarValor(nrConta, qtd, "Depósito");

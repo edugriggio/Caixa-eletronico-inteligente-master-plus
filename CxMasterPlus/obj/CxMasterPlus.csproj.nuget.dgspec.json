@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus-master\\CxMasterPlus\\CxMasterPlus.csproj": {}
+    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {}
   },
   "projects": {
-    "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus-master\\CxMasterPlus\\CxMasterPlus.csproj": {
+    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus-master\\CxMasterPlus\\CxMasterPlus.csproj",
+        "projectUniqueName": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
         "projectName": "CxMasterPlus",
-        "projectPath": "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus-master\\CxMasterPlus\\CxMasterPlus.csproj",
-        "packagesPath": "C:\\Users\\edu_g\\.nuget\\packages\\",
-        "outputPath": "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus-master\\CxMasterPlus\\obj\\",
+        "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\edu_g\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
