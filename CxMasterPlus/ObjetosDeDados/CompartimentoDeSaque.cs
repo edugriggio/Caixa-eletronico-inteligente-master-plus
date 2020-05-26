@@ -14,24 +14,24 @@ namespace CxMasterPlus
             count = quantiaInicial;
         }
 
-        public void dispensarDinheiro(int qtd)
+        public void DispensarDinheiro(int qtd)
         {
             int qtdNotas = qtd / 20;
             count -= qtdNotas;
         }
 
-        public Boolean temSaldoSuficiente(int qtd)
+        public Boolean TemSaldoSuficiente(int qtd)
         {
             int qtdNotas = qtd / 20;
             return count >= qtdNotas;
         }
 
-        public double valorEmCaixa()
+        public double ValorEmCaixa()
         {
             return count * 20;
         }
 
-        public void adicionarNotas(double qtd)
+        public void AdicionarNotas(double qtd)
         {
             count += (int)(qtd * 0.8) / 20;
         }

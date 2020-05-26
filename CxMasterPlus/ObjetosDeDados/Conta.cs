@@ -12,10 +12,11 @@ namespace CxMasterPlus
         private double valorDisponivel;
         private double limiteDiario = 0;
         private double limiteFimDeSemana = 0;
+        private double vlrDispEmprestimo = 0;
         private int tipoConta;
         private List<Transacao> historicoTransacoes;
 
-        public Conta(int acc, int password, double vlrDisponivel, int tipoConta)
+        public Conta(int acc, int password, double vlrDisponivel, int tipoConta, double vlrDispEmprestimo)
         {
             this.tipoConta = tipoConta;
             numeroConta = acc;
@@ -27,14 +28,17 @@ namespace CxMasterPlus
                 case 1:
                     this.limiteDiario = 200;
                     this.limiteFimDeSemana = 200;
+                    this.vlrDispEmprestimo = 500;
                     break;
                 case 2:
                     this.limiteDiario = 1000;
                     this.limiteFimDeSemana = 750;
+                    this.vlrDispEmprestimo = 2000;
                     break;
                 case 3:
                     this.limiteDiario = 3000;
                     this.limiteFimDeSemana = 5000;
+                    this.vlrDispEmprestimo = 10000;
                     break;
             }
         }
@@ -49,16 +53,31 @@ namespace CxMasterPlus
             return this.valorDisponivel;
         }
 
-        public void CreditarValor(double valor)
+        public double ValorDisponivelEmprestimo()
+        {
+            return this.vlrDispEmprestimo;
+        }
+
+        public void CreditarValor(double valor, string operacao)
         {
             valorDisponivel += valor;
-            GravarTransacao(DateTime.Now, "Depósito", valor);
+            GravarTransacao(DateTime.Now, operacao, valor);
+
+            if(operacao == "Empréstimo")
+            {
+                SubtrairLimiteEmprestimo(valor);
+            }
         }
 
         public void DebitarValor(double valor)
         {
             valorDisponivel -= valor;
             GravarTransacao(DateTime.Now, "Saque", valor);
+        }
+
+        public void ParcelaEmprestimo(double valor, DateTime dataParcela)
+        {
+            GravarTransacao(dataParcela, "Amortização de empréstimo", valor);
         }
 
         public int NumeroConta()
@@ -83,7 +102,7 @@ namespace CxMasterPlus
             }
         }
 
-        public void subtrairLimiteDiario(double valor, String date)
+        public void SubtrairLimiteDiario(double valor, String date)
         {
             if (date.Equals(DayOfWeek.Sunday.ToString()) || date.Equals(DayOfWeek.Saturday.ToString()))
             {
@@ -93,6 +112,11 @@ namespace CxMasterPlus
             {
                 limiteDiario -= valor;
             }
+        }
+
+        public void SubtrairLimiteEmprestimo(double valor)
+        {
+            vlrDispEmprestimo -= valor;
         }
 
         public void GravarTransacao(DateTime diaTransacao, string operacao, double valor)
