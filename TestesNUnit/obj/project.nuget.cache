@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c0jbMYpRGikL8cAyWi0dUUzwpJnDE+8dbDUUFbZFDXmvba6N/m6JeRN+XKDMuc3l0/vrKrRMcGOSfYzXRpaxQg==",
+  "dgSpecHash": "6JjmCPEpOrwGfvi85W2ztLw/OCTDyZVyswyYcTG8qz0+A5xhfx9WzrXYYjTmLj59rl7xVQ3cvg5BQ/ln3PEJGQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\TestesNUnit.csproj",
+  "projectFilePath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\TestesNUnit.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",

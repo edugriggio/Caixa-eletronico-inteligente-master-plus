@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {}
+    "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {
+    "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
+        "projectUniqueName": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
         "projectName": "BancoDeTestes",
-        "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
+        "projectPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\BancoDeTestes.csproj",
         "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\obj\\",
+        "outputPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\BancoDeTestes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
-                "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj"
+              "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+                "projectPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj"
               }
             }
           }
@@ -78,14 +78,14 @@
         }
       }
     },
-    "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+    "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "projectUniqueName": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
         "projectName": "CxMasterPlus",
-        "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "projectPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
         "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\obj\\",
+        "outputPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",

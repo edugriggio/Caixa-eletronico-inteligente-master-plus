@@ -4596,11 +4596,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\TestesNUnit.csproj",
+      "projectUniqueName": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\TestesNUnit.csproj",
       "projectName": "TestesNUnit",
-      "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\TestesNUnit.csproj",
+      "projectPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\TestesNUnit.csproj",
       "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\obj\\",
+      "outputPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\TestesNUnit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4616,8 +4616,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
-              "projectPath": "C:\\Users\\Rafael\\Source\\Repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj"
+            "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+              "projectPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj"
             }
           }
         }
