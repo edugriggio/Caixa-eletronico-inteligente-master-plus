@@ -4,7 +4,6 @@ namespace CxMasterPlus
 {
     public class Saque
     {
-        private readonly DateTime date = new DateTime();
 
         public String EfetuarSaque(int nrConta, BaseDeDados baseDeDados, int qtd, CompartimentoDeSaque compartimentoDeSaque)
         {
@@ -17,7 +16,7 @@ namespace CxMasterPlus
                     return "Valor inválido";
                 }
 
-                if (baseDeDados.getLimiteDiario(nrConta, (date.DayOfWeek - 1).ToString()) == 0)
+                if (baseDeDados.getLimiteDiario(nrConta, (DateTime.Today.DayOfWeek).ToString()) == 0)
                 {
                     return "Valor excede o limite diário conforme o seu tipo de conta.";
                 }
@@ -32,12 +31,12 @@ namespace CxMasterPlus
                 {
                     if (compartimentoDeSaque.TemSaldoSuficiente(qtd))
                     {
-                        if (baseDeDados.getLimiteDiario(nrConta, (date.DayOfWeek - 1).ToString()) >= qtd)
+                        if (baseDeDados.getLimiteDiario(nrConta, (DateTime.Today.DayOfWeek).ToString()) >= qtd)
                         {
                             baseDeDados.DebitarValor(nrConta, qtd);
 
                             compartimentoDeSaque.DispensarDinheiro(qtd);
-                            baseDeDados.SubtrairLimiteDiario(nrConta, qtd, (date.DayOfWeek - 1).ToString());
+                            baseDeDados.SubtrairLimiteDiario(nrConta, qtd, (DateTime.Today.DayOfWeek).ToString());
                             return "Transação realizada.\nPor favor, retire seu dinheiro.";
                         }
                         else
