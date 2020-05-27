@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {}
+    "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Trabalho Caixa Eletronico\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus\\trunk\\CxMasterPlus\\CxMasterPlus.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj": {
+    "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Trabalho Caixa Eletronico\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus\\trunk\\CxMasterPlus\\CxMasterPlus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
+        "projectUniqueName": "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Trabalho Caixa Eletronico\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus\\trunk\\CxMasterPlus\\CxMasterPlus.csproj",
         "projectName": "CxMasterPlus",
-        "projectPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\CxMasterPlus.csproj",
-        "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rafael\\source\\repos\\Caixa-eletronico-inteligente-master-plus\\CxMasterPlus\\obj\\",
+        "projectPath": "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Trabalho Caixa Eletronico\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus\\trunk\\CxMasterPlus\\CxMasterPlus.csproj",
+        "packagesPath": "C:\\Users\\edu_g\\.nuget\\packages\\",
+        "outputPath": "D:\\Eduardo\\Faculdade\\Engenharia de Software\\Trabalho Caixa Eletronico\\Caixa-eletronico-inteligente-master-plus-master\\Caixa-eletronico-inteligente-master-plus\\trunk\\CxMasterPlus\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\edu_g\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

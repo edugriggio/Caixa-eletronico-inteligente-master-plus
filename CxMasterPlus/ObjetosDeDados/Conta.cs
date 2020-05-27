@@ -62,22 +62,35 @@ namespace CxMasterPlus
         {
             valorDisponivel += valor;
             GravarTransacao(DateTime.Now, operacao, valor);
-
-            if(operacao == "Empréstimo")
-            {
-                SubtrairLimiteEmprestimo(valor);
-            }
         }
 
         public void DebitarValor(double valor)
         {
             valorDisponivel -= valor;
-            GravarTransacao(DateTime.Now, "Saque", valor);
+            GravarTransacao(DateTime.Now, Enums.Saque, valor);
         }
 
-        public void ParcelaEmprestimo(double valor, DateTime dataParcela)
+        public void ParcelaEmprestimo(double vrTotalEmprestimo, double valor, DateTime dataParcela, int nrParcela, int nrTotalParcelas)
         {
-            GravarTransacao(dataParcela, "Amortização de empréstimo", valor);
+            string nomeOperacao;
+
+            if (dataParcela <= DateTime.Today)
+            {
+                nomeOperacao = string.Concat(Enums.PagtoParcela, " (", nrParcela, "/", nrTotalParcelas, ")");
+                GravarTransacao(dataParcela, nomeOperacao, vrTotalEmprestimo, valor, nrParcela, nrTotalParcelas);
+            }
+            else if(nrParcela == 1)
+            {
+                nomeOperacao = string.Concat(Enums.PagtoParcelaPrevisto, " (", nrParcela, "/", nrTotalParcelas, ")");
+                GravarTransacao(dataParcela, nomeOperacao, vrTotalEmprestimo, valor, nrParcela, nrTotalParcelas);
+            }
+        }
+
+        public void PagamentoParcela(double vrTotalEmprestimo, double valorParcela, DateTime dataParcela, int? nrParcela, int? nrTotalParcelas)
+        {
+            valorDisponivel -= valorParcela;
+            string nomeOperacao = string.Concat(Enums.PagtoParcela, " (", nrParcela, "/", nrTotalParcelas, ")");
+            GravarTransacao(dataParcela, nomeOperacao, vrTotalEmprestimo, valorParcela, nrParcela, nrTotalParcelas);
         }
 
         public int NumeroConta()
@@ -119,14 +132,34 @@ namespace CxMasterPlus
             vlrDispEmprestimo -= valor;
         }
 
+        public void AdicionarLimiteEmprestimo(double valor)
+        {
+            vlrDispEmprestimo += valor;
+        }
+
         public void GravarTransacao(DateTime diaTransacao, string operacao, double valor)
         {
-            historicoTransacoes.Add(new Transacao(diaTransacao, operacao, valor));
+            historicoTransacoes.Add(new Transacao(diaTransacao, operacao, valor, null, null, null));
+        }
+
+        public void GravarTransacao(DateTime diaTransacao, string nomeOperacao, double vrTotalEmprestimo, double valor, int? nrParcela, int? nrTotalParcelas)
+        {
+            historicoTransacoes.Add(new Transacao(diaTransacao, nomeOperacao, valor, nrParcela, vrTotalEmprestimo, nrTotalParcelas));
         }
 
         public List<Transacao> LerTransacoes()
         {
             return historicoTransacoes;
+        }
+
+        public void AdicionarTransacao(Transacao transacao)
+        {
+            historicoTransacoes.Add(transacao);
+        }
+
+        public void RemoverTransacao(Transacao transacao)
+        {
+            historicoTransacoes.Remove(transacao);
         }
     }
 }

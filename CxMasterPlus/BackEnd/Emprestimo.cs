@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security;
 using System.Text;
 
-namespace CxMasterPlus.BackEnd
+namespace CxMasterPlus
 {
     public class Emprestimo
     {
@@ -17,16 +17,16 @@ namespace CxMasterPlus.BackEnd
             return (nrParcelas > 0 && nrParcelas <= 12) ? true : false;
         }
 
-        public string RealizarEmprestimo(Tela tela, int nrConta, BaseDeDados baseDeDados, double vlrEmprestimo, double taxaJuros, int nrParcelas)
+        public string RealizarEmprestimo(Tela tela, int nrConta, BaseDeDados baseDeDados, double vlrEmprestimo, double taxaJuros, int nrTotalParcelas)
         {
             DateTime dataAtual = DateTime.Today;
             double vlrEmpComJuros = vlrEmprestimo + (vlrEmprestimo * (taxaJuros / 100));
-            double vlrParcelas = vlrEmpComJuros / nrParcelas;
+            double vlrParcelas = vlrEmpComJuros / nrTotalParcelas;
 
             #region Menu de confirmação da operação
             Console.Clear();
             tela.ImprimirMensagem(string.Concat("Valor do empréstimo: ", vlrEmprestimo.ToString("C")));
-            tela.ImprimirMensagem(string.Concat("Prazo final para pagamento: ", dataAtual.AddMonths(nrParcelas).ToString("dd/MM/yyyy")));
+            tela.ImprimirMensagem(string.Concat("Prazo final para pagamento: ", dataAtual.AddMonths(nrTotalParcelas).ToString("dd/MM/yyyy")));
             tela.ImprimirMensagem(string.Concat("Valor total a ser pago: ", vlrEmpComJuros.ToString("C")));
             tela.ImprimirMensagem("\n--------------------------------------\n");
             tela.ImprimirMensagem("Confirma a solicitação do empréstimo?");
@@ -40,14 +40,20 @@ namespace CxMasterPlus.BackEnd
             #region Realiza o Empréstimo
             if (opcao == 1)
             {
+                int nrParcela = 1;
+
                 //Credita valor na conta
-                baseDeDados.CreditarValor(nrConta, vlrEmprestimo, "Empréstimo");
+                baseDeDados.CreditarValor(nrConta, vlrEmprestimo, Enums.Emprestimo);
+
+                //Subtrai limite de empréstimo na conta
+                baseDeDados.SubtrairLimiteEmprestimo(nrConta, vlrEmprestimo);
 
                 //Adiciona parcelas futuras ao extrato
-                for (int i = 1; i <= nrParcelas; i++)
+                for (int i = 1; i <= nrTotalParcelas; i++)
                 {
                     DateTime dataParcela = dataAtual.AddMonths(i);
-                    baseDeDados.ParcelaEmprestimo(nrConta, vlrParcelas, dataParcela);
+                    baseDeDados.ParcelaEmprestimo(nrConta, vlrEmprestimo, vlrParcelas, dataParcela, nrParcela, nrTotalParcelas);
+                    nrParcela++;
                 }
 
                 return "Transação Efetivada.";

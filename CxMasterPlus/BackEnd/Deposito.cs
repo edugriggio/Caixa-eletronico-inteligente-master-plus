@@ -20,7 +20,7 @@ namespace CxMasterPlus
                 if (tipoDeposito == 1 && qtd > 0 || tipoDeposito == 2 && qtd > 0)
                 {
                     //Credita valor na conta
-                    baseDeDados.CreditarValor(nrConta, qtd, "Depósito");
+                    baseDeDados.CreditarValor(nrConta, qtd, Enums.Deposito);
                     if (tipoDeposito == 2)
                     {
                         compartimentoDeSaque.AdicionarNotas(qtd);

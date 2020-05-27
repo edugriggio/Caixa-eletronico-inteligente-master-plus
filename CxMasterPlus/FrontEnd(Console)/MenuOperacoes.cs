@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using CxMasterPlus.BackEnd;
 using FrameworkProjeto;
+using System.Linq;
+using System.ComponentModel;
 
 namespace CxMasterPlus
 {
@@ -281,32 +282,124 @@ namespace CxMasterPlus
                         tela.ImprimirMensagem(string.Concat("O valor do empréstimo deve ser positivo e menor que ", valorMaxEmprestimo.ToString("C"), ". A transação será cancelada."));
                         Console.ReadKey();
                         Console.Clear();
-                        valorEmprestimo = 0;
                     }
                     #endregion
-
-                    tela.ImprimirMensagem("\nPor favor, insira um prazo para o empréstimo (prazo máximo de 12 meses): ");
-                    int nrParcelas = validador.ValidarInputMenu(tela, Console.ReadLine());
-
-                    if (nrParcelas > 0)
+                    //Se valor é válido
+                    else
                     {
-                        #region RN: Valida prazo do empréstimo
-                        if (!svEmprestimo.VeririficaPrazoEmprestimo(nrParcelas))
-                        {
-                            Console.Clear();
-                            tela.ImprimirMensagem(string.Concat("O prazo deve ser positivo de no máximo 12 meses. A transação será cancelada."));
-                            Console.ReadKey();
-                            Console.Clear();
-                            valorEmprestimo = 0;
-                        }
-                        #endregion
+                        tela.ImprimirMensagem("\nPor favor, insira um prazo para o empréstimo (prazo máximo de 12 meses): ");
+                        int nrParcelas = validador.ValidarInputMenu(tela, Console.ReadLine());
 
+                        if (nrParcelas > 0)
+                        {
+                            #region RN: Valida prazo do empréstimo
+                            if (!svEmprestimo.VeririficaPrazoEmprestimo(nrParcelas))
+                            {
+                                Console.Clear();
+                                tela.ImprimirMensagem(string.Concat("O prazo deve ser positivo de no máximo 12 meses. A transação será cancelada."));
+                                Console.ReadKey();
+                                Console.Clear();
+                            }
+                            #endregion
+                            //Se prazo é válido
+                            else
+                            {
+                                Console.Clear();
+                                if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
+                                {
+                                    string retornoEmprestimo = svEmprestimo.RealizarEmprestimo(tela, contaLogada, baseDeDados, valorEmprestimo, taxaJuros, nrParcelas);
+                                    Console.Clear();
+                                    tela.ImprimirMensagem(retornoEmprestimo);
+                                    Console.ReadKey();
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Pagamento das Parcelas
+            if (inputMenu == 2)
+            {
+                PagamentoParcelas svPagamentoParcelas = new PagamentoParcelas();
+
+                int count = 1;
+                int contaMeses = 1;
+                int opcao;
+
+                //Busca lista de parcelas pagas
+                var listaParcelasPagas = baseDeDados.getHistoricoTransacoes(contaLogada)
+                                                .Where(x => x.Operacao.Contains(Enums.PagtoParcela)).ToList();
+
+                //Busca lista de parcelas abertas
+                var listaParcelasAbertas = baseDeDados.getHistoricoTransacoes(contaLogada)
+                                                .Where(x => x.Operacao.Contains(Enums.PagtoParcelaPrevisto)).ToList();
+
+                if (listaParcelasAbertas.Any())
+                {
+                    //Completa lista de parcelas previstas com parcelas futuras
+                    for (int i = listaParcelasPagas.Count; i < listaParcelasAbertas[0].NrTotalParcelas - 1; i++)
+                    {
+                        Transacao parcela = new Transacao(listaParcelasAbertas[0].DataTransacao.AddMonths(contaMeses),
+                                                            listaParcelasAbertas[0].Operacao,
+                                                            listaParcelasAbertas[0].Valor,
+                                                            listaParcelasAbertas[0].NrParcela + contaMeses,
+                                                            listaParcelasAbertas[0].VrTotalEmprestimo,
+                                                            listaParcelasAbertas[0].NrTotalParcelas);
+
+                        listaParcelasAbertas.Add(parcela);
+                        contaMeses++;
+                    }
+
+                    int nrTotalParcelas = Convert.ToInt32(listaParcelasAbertas[0].NrTotalParcelas);
+
+                    #region Lista de parcelas
+                    Console.Clear();
+                    tela.ImprimirMensagem("Parcelas pagas:");
+
+                    if (listaParcelasPagas.Any())
+                    {
+                        foreach (var parcela in listaParcelasPagas)
+                        {
+                            tela.ImprimirMensagem(String.Concat("Parcela ", parcela.NrParcela.ToString().PadLeft(2, '0'), "/", nrTotalParcelas.ToString().PadLeft(2, '0'), " - ", parcela.DataTransacao.ToString("dd/MM/yyyy"), " - ", parcela.Valor.ToString("C")));
+                        }
+                    }
+                    else
+                    {
+                        tela.ImprimirMensagem("Nenhuma parcela encontrada.");
+                    }
+
+                    tela.ImprimirMensagem("\n--------------------------------------\n");
+                    tela.ImprimirMensagem("Parcelas em aberto:");
+
+                    foreach (var parcela in listaParcelasAbertas)
+                    {
+                        tela.ImprimirMensagem(String.Concat("Parcela ", parcela.NrParcela.ToString().PadLeft(2, '0'), "/", nrTotalParcelas.ToString().PadLeft(2, '0'), " - ", parcela.DataTransacao.ToString("dd/MM/yyyy"), " - ", parcela.Valor.ToString("C")));
+                        count++;
+                    }
+
+                    tela.ImprimirMensagem(String.Concat("\nDeseja pagar a ", listaParcelasAbertas[0].NrParcela, "ª parcela?"));
+                    tela.ImprimirMensagem("1 - Sim");
+                    tela.ImprimirMensagem("2 - Não");
+                    opcao = validador.ValidarInputMenu(tela, Console.ReadLine());
+                    #endregion
+
+                    if (opcao == 1)
+                    {
                         Console.Clear();
                         if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
                         {
-                            string retornoEmprestimo = svEmprestimo.RealizarEmprestimo(tela, contaLogada, baseDeDados, valorEmprestimo, taxaJuros, nrParcelas);
+                            string retornoPagamento = svPagamentoParcelas.RealizarPagamento(tela, baseDeDados, contaLogada, listaParcelasAbertas.OrderBy(x => x.DataTransacao).First());
                             Console.Clear();
-                            tela.ImprimirMensagem(retornoEmprestimo);
+                            tela.ImprimirMensagem(retornoPagamento);
                             Console.ReadKey();
                         }
                         else
@@ -318,15 +411,15 @@ namespace CxMasterPlus
                         }
                     }
                 }
+                else
+                {
+                    Console.Clear();
+                    tela.ImprimirMensagem("Não foram encontradas parcelas referentes a um empréstimo.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                #endregion
             }
-            #endregion
-
-            #region Pagamento das Parcelas
-            if (inputMenu == 2)
-            {
-                //TODO: Pagamento das parcelas do empréstimo
-            }
-            #endregion
         }
     }
 }

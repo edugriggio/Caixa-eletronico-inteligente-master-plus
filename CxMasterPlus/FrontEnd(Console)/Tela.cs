@@ -24,6 +24,7 @@ namespace CxMasterPlus
 
         public void ExibirExtrato(Extrato extrato)
         {
+            //Exibe cabeçalho do extrato
             StringBuilder sb = new StringBuilder();
             sb.Append("Informações de saldo:");
             sb.Append("\nSaldo disponível: " + converterValor(extrato.ValorDisponivel));
@@ -34,12 +35,26 @@ namespace CxMasterPlus
             }
             else
             {
+                //Exibe corpo do extrato
                 foreach (Transacao transacao in extrato.HistoricoTransacoes)
                 {
                     sb.Append("\n------------------------------------");
                     sb.Append("\nData: " + transacao.DataTransacao);
                     sb.Append("\nOperação: " + transacao.Operacao);
-                    sb.Append("\nValor: " + converterValor(transacao.Valor));
+
+                    //Verifica sinal da transação de acordo com o tipo
+                    if (transacao.Operacao == Enums.Deposito || transacao.Operacao == Enums.Emprestimo)
+                    {
+                        sb.Append("\nValor: + " + converterValor(transacao.Valor));
+                    }
+                    else if (transacao.Operacao == Enums.Saque || transacao.Operacao.Contains("Pagamento"))
+                    {
+                        sb.Append("\nValor: - " + converterValor(transacao.Valor));
+                    }
+                    else
+                    {
+                        sb.Append("\nValor: " + converterValor(transacao.Valor));
+                    }
                 }
             }
            
