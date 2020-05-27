@@ -342,7 +342,7 @@ namespace CxMasterPlus
                 //Busca lista de parcelas abertas
                 var listaParcelasAbertas = baseDeDados.getHistoricoTransacoes(contaLogada)
                                                 .Where(x => x.Operacao.Contains(Enums.PagtoParcelaPrevisto)).ToList();
-
+                //Verifica se existem parcelas de empréstimo
                 if (listaParcelasAbertas.Any())
                 {
                     //Completa lista de parcelas previstas com parcelas futuras
@@ -389,26 +389,50 @@ namespace CxMasterPlus
                     tela.ImprimirMensagem(String.Concat("\nDeseja pagar a ", listaParcelasAbertas[0].NrParcela, "ª parcela?"));
                     tela.ImprimirMensagem("1 - Sim");
                     tela.ImprimirMensagem("2 - Não");
+
                     opcao = validador.ValidarInputMenu(tela, Console.ReadLine());
                     #endregion
 
-                    if (opcao == 1)
+                    switch (opcao)
                     {
-                        Console.Clear();
-                        if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
-                        {
-                            string retornoPagamento = svPagamentoParcelas.RealizarPagamento(tela, baseDeDados, contaLogada, listaParcelasAbertas.OrderBy(x => x.DataTransacao).First());
+                        case 0:
                             Console.Clear();
-                            tela.ImprimirMensagem(retornoPagamento);
-                            Console.ReadKey();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
+                            tela.ImprimirMensagem("Transação cancelada.");
                             Console.ReadKey();
                             Console.Clear();
-                        }
+                            break;
+
+                        case 1:
+                            Console.Clear();
+                            if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
+                            {
+                                string retornoPagamento = svPagamentoParcelas.RealizarPagamento(tela, baseDeDados, contaLogada, listaParcelasAbertas.OrderBy(x => x.DataTransacao).First());
+                                Console.Clear();
+                                tela.ImprimirMensagem(retornoPagamento);
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
+                                Console.ReadKey();
+                                Console.Clear();
+                            }
+                            break;
+
+                        case 2:
+                            Console.Clear();
+                            tela.ImprimirMensagem("Operação cancelada.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+
+                        default:
+                            Console.Clear();
+                            tela.ImprimirMensagem("Opção inválida. Operação cancelada");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
                     }
                 }
                 else

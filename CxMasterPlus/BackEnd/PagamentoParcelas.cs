@@ -6,9 +6,7 @@ using System.Linq;
 namespace CxMasterPlus
 {
     class PagamentoParcelas
-    {
-        Validadores validador = new Validadores();
-
+    {      
         public bool VeririficaSaldoPagamento(double novoValorParcela, double saldoDisponivel)
         {
             return novoValorParcela < saldoDisponivel ? true : false;
@@ -23,54 +21,52 @@ namespace CxMasterPlus
             double novoValorParcela = novoValorTotal / Convert.ToDouble(parcela.NrTotalParcelas);
 
             #region Menu de confirmação da operação
-            Console.Clear();
-            tela.ImprimirMensagem(String.Concat("Juros inicial: 5%"));
-            tela.ImprimirMensagem(String.Concat("Valor da parcela: ", parcela.Valor.ToString("C")));
-            tela.ImprimirMensagem(String.Concat("\nJuros abonado: 2%"));
-            tela.ImprimirMensagem(String.Concat("Novo valor da parcela: ", novoValorParcela.ToString("C")));
-            tela.ImprimirMensagem("\n--------------------------------------\n");
-            tela.ImprimirMensagem(String.Concat("Confirma o pagamento no valor de ", novoValorParcela.ToString("C"), "?"));
-            tela.ImprimirMensagem("1 - Sim");
-            tela.ImprimirMensagem("2 - Não");
-            #endregion
-            int opcao = validador.ValidarInputMenu(tela, Console.ReadLine());
+            string opcaoSelecionada = tela.ConfirmacaoPagamentoParcelaEmp(parcela.Valor, novoValorParcela);
 
-            if (opcao == 1)
+            Validadores validador = new Validadores();
+            int opcao = validador.ValidarInputMenu(tela, opcaoSelecionada);
+            #endregion         
+
+            switch (opcao)
             {
-                #region Valida se conta tem dinheiro suficiente para pagamento da parcela
-                double saldoDisponivel = baseDeDados.RetornaSaldoDisponivel(nrConta);
+                case 0:
+                    return "Transação cancelada.";
 
-                if (!VeririficaSaldoPagamento(novoValorParcela, saldoDisponivel))
-                {
-                    Console.Clear();
-                    tela.ImprimirMensagem(String.Concat("Saldo insuficiente para pagamento da parcela. A transação será cancelada."));
-                    Console.ReadKey();
-                    Console.Clear();
-                }
-                #endregion
-                #region Realiza pagamento
-                else
-                {
-                    //Busca parcela a ser paga
-                    var parcelaAPagar = baseDeDados.getHistoricoTransacoes(nrConta)
-                                                    .Where(x => x.DataTransacao == parcela.DataTransacao).ToList();
+                case 1:
+                    #region Valida se conta tem dinheiro suficiente para pagamento da parcela
+                    double saldoDisponivel = baseDeDados.RetornaSaldoDisponivel(nrConta);
 
-                    //Efetua pagamento
-                    baseDeDados.PagamentoParcela(nrConta, novoValorTotal, novoValorParcela, DateTime.Now, parcela.NrParcela, parcela.NrTotalParcelas);
+                    if (!VeririficaSaldoPagamento(novoValorParcela, saldoDisponivel))
+                    {                   
+                        return "Saldo insuficiente para pagamento da parcela. A transação será cancelada.";
+                    }
+                    #endregion
+                    #region Realiza pagamento
+                    else
+                    {
+                        //Busca parcela a ser paga
+                        var parcelaAPagar = baseDeDados.getHistoricoTransacoes(nrConta)
+                                                        .Where(x => x.DataTransacao == parcela.DataTransacao).ToList();
 
-                    //Atualiza próxima parcela para o extrato
-                    baseDeDados.AtualizaParcelaPrevista(nrConta, parcela);
+                        //Efetua pagamento
+                        baseDeDados.PagamentoParcela(nrConta, novoValorTotal, novoValorParcela, DateTime.Now, parcela.NrParcela, parcela.NrTotalParcelas);
 
-                    //Adiciona limite de empréstimo na conta
-                    baseDeDados.AdicionarLimiteEmprestimo(nrConta, vrTotalEmp);
+                        //Atualiza próxima parcela para o extrato
+                        baseDeDados.AtualizaParcelaPrevista(nrConta, parcela);
 
-                    return "Transação efetuada.";
-                }
-                #endregion
-            }
+                        //Adiciona limite de empréstimo na conta
+                        baseDeDados.AdicionarLimiteEmprestimo(nrConta, vrTotalEmp);
 
-            //Caso a operação seja recusada
-            return "Operação cancelada.";
+                        return "Transação efetuada.";
+                    }
+                    #endregion              
+
+                case 2:
+                    return "Operação cancelada.";
+
+                default:
+                    return "Opção Inválida. Operação cancelada.";
+            }  
         }
     }
 }

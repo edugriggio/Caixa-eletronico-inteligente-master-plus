@@ -23,45 +23,43 @@ namespace CxMasterPlus
             double vlrEmpComJuros = vlrEmprestimo + (vlrEmprestimo * (taxaJuros / 100));
             double vlrParcelas = vlrEmpComJuros / nrTotalParcelas;
 
+
             #region Menu de confirmação da operação
-            Console.Clear();
-            tela.ImprimirMensagem(string.Concat("Valor do empréstimo: ", vlrEmprestimo.ToString("C")));
-            tela.ImprimirMensagem(string.Concat("Prazo final para pagamento: ", dataAtual.AddMonths(nrTotalParcelas).ToString("dd/MM/yyyy")));
-            tela.ImprimirMensagem(string.Concat("Valor total a ser pago: ", vlrEmpComJuros.ToString("C")));
-            tela.ImprimirMensagem("\n--------------------------------------\n");
-            tela.ImprimirMensagem("Confirma a solicitação do empréstimo?");
-            tela.ImprimirMensagem("1 - Sim");
-            tela.ImprimirMensagem("2 - Não");
-
+            string opcaoSelecionada = tela.ConfirmacaoEmprestimo(vlrEmprestimo, dataAtual, nrTotalParcelas, vlrEmpComJuros);
+       
             Validadores validador = new Validadores();
-            int opcao = validador.ValidarInputMenu(tela, Console.ReadLine());
+            int opcao = validador.ValidarInputMenu(tela, opcaoSelecionada);
             #endregion
 
-            #region Realiza o Empréstimo
-            if (opcao == 1)
+            switch (opcao)
             {
-                int nrParcela = 1;
+                case 0:
+                    return "Transação cancelada.";
+               
+                case 1:
+                    int nrParcela = 1;
 
-                //Credita valor na conta
-                baseDeDados.CreditarValor(nrConta, vlrEmprestimo, Enums.Emprestimo);
+                    //Credita valor na conta
+                    baseDeDados.CreditarValor(nrConta, vlrEmprestimo, Enums.Emprestimo);
 
-                //Subtrai limite de empréstimo na conta
-                baseDeDados.SubtrairLimiteEmprestimo(nrConta, vlrEmprestimo);
+                    //Subtrai limite de empréstimo na conta
+                    baseDeDados.SubtrairLimiteEmprestimo(nrConta, vlrEmprestimo);
 
-                //Adiciona parcelas futuras ao extrato
-                for (int i = 1; i <= nrTotalParcelas; i++)
-                {
-                    DateTime dataParcela = dataAtual.AddMonths(i);
-                    baseDeDados.ParcelaEmprestimo(nrConta, vlrEmprestimo, vlrParcelas, dataParcela, nrParcela, nrTotalParcelas);
-                    nrParcela++;
-                }
-
-                return "Transação Efetivada.";
-            }
-            #endregion
-
-            //Caso a operação seja recusada
-            return "Operação cancelada.";
+                    //Adiciona parcelas futuras ao extrato
+                    for (int i = 1; i <= nrTotalParcelas; i++)
+                    {
+                        DateTime dataParcela = dataAtual.AddMonths(i);
+                        baseDeDados.ParcelaEmprestimo(nrConta, vlrEmprestimo, vlrParcelas, dataParcela, nrParcela, nrTotalParcelas);
+                        nrParcela++;
+                    }
+                    return "Transação Efetivada.";
+                
+                case 2:
+                    return "Operação cancelada.";
+                
+                default:
+                    return "Opção Inválida. Operação Cancelada.";
+            }                
         }
     }
 }

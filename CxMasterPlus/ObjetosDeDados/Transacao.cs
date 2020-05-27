@@ -18,16 +18,16 @@ namespace CxMasterPlus
             this.dataTransacao = dataTransacao;
             this.operacao = operacao;
             this.valor = valor;
+            this.vrTotalEmprestimo = vrTotalEmprestimo;
             this.nrParcela = nrParcela;
             this.nrTotalParcelas = nrTotalParcelas;
-            this.vrTotalEmprestimo = vrTotalEmprestimo;
         }
 
         public DateTime DataTransacao { get => dataTransacao; }
         public string Operacao { get => operacao; }
         public double Valor { get => valor; }
-        public int? NrParcela { get => nrParcela; }
         public double? VrTotalEmprestimo { get => vrTotalEmprestimo; }
+        public int? NrParcela { get => nrParcela; }
         public int? NrTotalParcelas { get => nrTotalParcelas; }
     }
 }
