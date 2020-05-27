@@ -6,7 +6,7 @@ namespace CxMasterPlus
 {
     public class CompartimentoDeSaque
     {
-        private int quantiaInicial = 10;
+        private int quantiaInicial = 300;
         private int count;
 
         public CompartimentoDeSaque()

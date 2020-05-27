@@ -12,8 +12,8 @@ namespace CxMasterPlus
         {
             contas = new Conta[3];
             contas[0] = new Conta(9999, 12345, 300, 1, 500);
-            contas[1] = new Conta(8888, 12345, 1000, 2, 2000);
-            contas[2] = new Conta(7777, 12345, 1000, 3, 10000);
+            contas[1] = new Conta(8888, 12345, 2000, 2, 2000);
+            contas[2] = new Conta(7777, 12345, 6000, 3, 10000);
 
             contas[0].GravarTransacao(DateTime.Now.AddDays(-30), "Saque", 200);
             contas[0].GravarTransacao(DateTime.Now.AddDays(-15), "Depósito", 500);
