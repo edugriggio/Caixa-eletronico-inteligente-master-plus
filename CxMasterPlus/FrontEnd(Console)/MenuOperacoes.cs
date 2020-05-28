@@ -406,7 +406,7 @@ namespace CxMasterPlus
                             Console.Clear();
                             if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
                             {
-                                string retornoPagamento = svPagamentoParcelas.RealizarPagamento(tela, baseDeDados, contaLogada, listaParcelasAbertas.OrderBy(x => x.DataTransacao).First());
+                                string retornoPagamento = svPagamentoParcelas.RealizarPagamento(baseDeDados, contaLogada, listaParcelasAbertas.OrderBy(x => x.DataTransacao).First());
                                 Console.Clear();
                                 tela.ImprimirMensagem(retornoPagamento);
                                 Console.ReadKey();
