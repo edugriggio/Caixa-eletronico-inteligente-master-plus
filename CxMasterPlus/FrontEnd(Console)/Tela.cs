@@ -42,12 +42,8 @@ namespace CxMasterPlus
                     sb.Append("\nData: " + transacao.DataTransacao);
                     sb.Append("\nOperação: " + transacao.Operacao);
 
-                    //Verifica sinal da transação de acordo com o tipo
-                    if (transacao.Operacao == Enums.Deposito || transacao.Operacao == Enums.Emprestimo)
-                    {
-                        sb.Append("\nValor: + " + converterValor(transacao.Valor));
-                    }
-                    else if (transacao.Operacao == Enums.Saque || transacao.Operacao.Contains("Pagamento"))
+                    //Verifica sinal da transação de acordo com o tipo                
+                    if (transacao.Operacao == Enums.Saque)
                     {
                         sb.Append("\nValor: - " + converterValor(transacao.Valor));
                     }

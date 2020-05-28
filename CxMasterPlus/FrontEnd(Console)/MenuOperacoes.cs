@@ -260,68 +260,78 @@ namespace CxMasterPlus
             #region Solicitar Empréstimo
             double valorMaxEmprestimo;
             double valorEmprestimo;
-            double taxaJuros = 5;
 
             if (inputMenu == 1)
             {
                 Emprestimo svEmprestimo = new Emprestimo();
                 valorMaxEmprestimo = baseDeDados.getVlrDispEmprestimo(contaLogada);
-
-                Console.Clear();
-                tela.ImprimirMensagem(string.Concat("Valor disponível para empréstimo: ", valorMaxEmprestimo.ToString("C")));
-                tela.ImprimirMensagem("Taxa de juros: 5%");
-                tela.ImprimirMensagem("Por favor, insira uma quantia desejada em R$ (ou 0 para cancelar): ");
-                valorEmprestimo = validador.ValidarInputMenu(tela, Console.ReadLine());
-
-                if (valorEmprestimo != 0)
+                
+                if (valorMaxEmprestimo == 0)
                 {
-                    #region RN: Valida se valor do empréstimo é permitido
-                    if (!svEmprestimo.VeririficaValorEmprestimo(valorEmprestimo, valorMaxEmprestimo))
-                    {
-                        Console.Clear();
-                        tela.ImprimirMensagem(string.Concat("O valor do empréstimo deve ser positivo e menor que ", valorMaxEmprestimo.ToString("C"), ". A transação será cancelada."));
-                        Console.ReadKey();
-                        Console.Clear();
-                    }
-                    #endregion
-                    //Se valor é válido
-                    else
-                    {
-                        tela.ImprimirMensagem("\nPor favor, insira um prazo para o empréstimo (prazo máximo de 12 meses): ");
-                        int nrParcelas = validador.ValidarInputMenu(tela, Console.ReadLine());
+                    Console.Clear();
+                    tela.ImprimirMensagem("Sem limite para empréstimo.");
+                    Console.ReadKey();
+                    Console.Clear();                  
+                }
 
-                        if (nrParcelas > 0)
+                else
+                {
+                    Console.Clear();
+                    tela.ImprimirMensagem(string.Concat("Valor disponível para empréstimo: ", valorMaxEmprestimo.ToString("C")));
+                    tela.ImprimirMensagem("Taxa de juros: 5%");
+                    tela.ImprimirMensagem("Por favor, insira uma quantia desejada em R$ (ou 0 para cancelar): ");
+                    valorEmprestimo = validador.ValidarInputMenu(tela, Console.ReadLine());
+
+                    if (valorEmprestimo != 0)
+                    {
+                        #region RN: Valida se valor do empréstimo é permitido
+                        if (!svEmprestimo.VeririficaValorEmprestimo(valorEmprestimo, valorMaxEmprestimo))
                         {
-                            #region RN: Valida prazo do empréstimo
-                            if (!svEmprestimo.VeririficaPrazoEmprestimo(nrParcelas))
+                            Console.Clear();
+                            tela.ImprimirMensagem(string.Concat("O valor do empréstimo deve ser positivo e menor que ", valorMaxEmprestimo.ToString("C"), ". A transação será cancelada."));
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                        #endregion
+                        //Se valor é válido
+                        else
+                        {
+                            tela.ImprimirMensagem("\nPor favor, insira um prazo para o empréstimo (prazo máximo de 12 meses): ");
+                            int nrParcelas = validador.ValidarInputMenu(tela, Console.ReadLine());
+
+                            if (nrParcelas > 0)
                             {
-                                Console.Clear();
-                                tela.ImprimirMensagem(string.Concat("O prazo deve ser positivo de no máximo 12 meses. A transação será cancelada."));
-                                Console.ReadKey();
-                                Console.Clear();
-                            }
-                            #endregion
-                            //Se prazo é válido
-                            else
-                            {
-                                Console.Clear();
-                                if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
+                                #region RN: Valida prazo do empréstimo
+                                if (!svEmprestimo.VeririficaPrazoEmprestimo(nrParcelas))
                                 {
-                                    string retornoEmprestimo = svEmprestimo.RealizarEmprestimo(tela, contaLogada, baseDeDados, valorEmprestimo, taxaJuros, nrParcelas);
                                     Console.Clear();
-                                    tela.ImprimirMensagem(retornoEmprestimo);
+                                    tela.ImprimirMensagem(string.Concat("O prazo deve ser positivo de no máximo 12 meses. A transação será cancelada."));
                                     Console.ReadKey();
+                                    Console.Clear();
                                 }
+                                #endregion
+                                //Se prazo é válido
                                 else
                                 {
                                     Console.Clear();
-                                    tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
-                                    Console.ReadKey();
-                                    Console.Clear();
+                                    if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
+                                    {
+                                        string retornoEmprestimo = svEmprestimo.RealizarEmprestimo(tela, contaLogada, baseDeDados, valorEmprestimo, nrParcelas);
+                                        Console.Clear();
+                                        tela.ImprimirMensagem(retornoEmprestimo);
+                                        Console.ReadKey();
+                                    }
+                                    else
+                                    {
+                                        Console.Clear();
+                                        tela.ImprimirMensagem("Senha Inválida. Sua transação não poderá ser efetivada.");
+                                        Console.ReadKey();
+                                        Console.Clear();
+                                    }
                                 }
                             }
                         }
-                    }
+                    } 
                 }
             }
             #endregion
