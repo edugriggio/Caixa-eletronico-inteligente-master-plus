@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="FrameworkProjeto">
       <HintPath>..\FrameworkProjeto\bin\Debug\FrameworkProjeto.dll</HintPath>
     </Reference>

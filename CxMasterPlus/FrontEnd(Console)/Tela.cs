@@ -12,11 +12,6 @@ namespace CxMasterPlus
             Console.WriteLine(mensagem);
         }
 
-        public void imprimirMensagem(String mensagem, params string[] args)
-        {
-            Console.WriteLine(string.Format(mensagem, args[0]));
-        }
-
         public String converterValor(double valor)
         {
             return valor.ToString("C2", CultureInfo.CurrentCulture);
@@ -43,7 +38,7 @@ namespace CxMasterPlus
                     sb.Append("\nOperação: " + transacao.Operacao);
 
                     //Verifica sinal da transação de acordo com o tipo                
-                    if (transacao.Operacao == Enums.Saque)
+                    if (transacao.Operacao == Operacao.Saque)
                     {
                         sb.Append("\nValor: - " + converterValor(transacao.Valor));
                     }

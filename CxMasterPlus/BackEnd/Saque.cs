@@ -5,23 +5,23 @@ namespace CxMasterPlus
     public class Saque
     {
 
-        public String EfetuarSaque(int nrConta, BaseDeDados baseDeDados, int qtd, CompartimentoDeSaque compartimentoDeSaque)
+        public String EfetuarSaque(Conta conta, BaseDeDados baseDeDados, int qtd)
         {
             try
             {
                 double saldoDisponivel;
 
-                if (qtd <= 0) 
+                if (qtd <= 0)
                 {
                     return "Valor inválido";
                 }
 
-                if (baseDeDados.getLimiteDiario(nrConta, (DateTime.Today.DayOfWeek).ToString()) == 0)
+                if (baseDeDados.getLimiteDiario(conta, (DateTime.Today.DayOfWeek).ToString()) == 0)
                 {
                     return "Valor excede o limite diário conforme o seu tipo de conta.";
                 }
 
-                saldoDisponivel = baseDeDados.RetornaSaldoDisponivel(nrConta);
+                saldoDisponivel = baseDeDados.RetornaSaldoDisponivel(conta);
                 if (saldoDisponivel < 20)
                 {
                     return "Saldo disponível em conta é menor que a nota de menor valor disponível no caixa eletrônico.";
@@ -29,15 +29,18 @@ namespace CxMasterPlus
 
                 if (qtd < saldoDisponivel)
                 {
-                    if (compartimentoDeSaque.TemSaldoSuficiente(qtd))
+                    if (baseDeDados.ObterSaldoCaixa()[0] > qtd)
                     {
-                        if (baseDeDados.getLimiteDiario(nrConta, (DateTime.Today.DayOfWeek).ToString()) >= qtd)
+                        if (baseDeDados.getLimiteDiario(conta, (DateTime.Today.DayOfWeek).ToString()) >= qtd)
                         {
-                            baseDeDados.DebitarValor(nrConta, qtd);
-
-                            compartimentoDeSaque.DispensarDinheiro(qtd);
-                            baseDeDados.SubtrairLimiteDiario(nrConta, qtd, (DateTime.Today.DayOfWeek).ToString());
-                            return "Transação realizada.\nPor favor, retire seu dinheiro.";
+                            if (baseDeDados.DebitarValor(conta, qtd, Operacao.Saque))
+                            {
+                                return "Transação realizada.\nPor favor, retire seu dinheiro.";
+                            }
+                            else
+                            {
+                                return "Problema ao efetuar sua transação. Tente novamente mais tarde.";
+                            }
                         }
                         else
                         {

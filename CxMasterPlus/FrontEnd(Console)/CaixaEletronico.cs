@@ -5,17 +5,15 @@ namespace CxMasterPlus
     class CaixaEletronico
     {
         private bool usuarioAutenticado;
-        private int contaLogada;
+        private Conta contaLogada;
         private Tela tela;
-        private CompartimentoDeSaque compartimentoDeSaque;
         private BaseDeDados baseDeDados;
 
         public CaixaEletronico()
         {
             usuarioAutenticado = false;
-            contaLogada = 0;
+            contaLogada = null;
             tela = new Tela();
-            compartimentoDeSaque = new CompartimentoDeSaque();
             baseDeDados = new BaseDeDados();
         }
 
@@ -30,7 +28,7 @@ namespace CxMasterPlus
 
                 executarTransacao();
                 usuarioAutenticado = false;
-                contaLogada = 0;
+                contaLogada = null;
                 tela.ImprimirMensagem("Obrigado por utilizar o Caixa Master Plus. Até logo!");
                 Console.ReadKey();
                 Console.Clear();
@@ -39,31 +37,32 @@ namespace CxMasterPlus
 
         private void autenticarUsuario()
         {
-            int nrConta;
-            int senha;
+            Conta conta = new Conta();
+            conta.NumeroConta = 0;
+            conta.Senha = 0;
             tela.ImprimirMensagem("Por favor digite o número da sua conta: ");
             try
             {
-                nrConta = Convert.ToInt32(Console.ReadLine());
+                conta.NumeroConta = Convert.ToInt32(Console.ReadLine());
             }
             catch (Exception)
             {
-                nrConta = 0;
+                conta.NumeroConta = 0;
             }
 
             tela.ImprimirMensagem("\nDigite sua senha: ");
             try
             {
-                senha = Convert.ToInt32(Console.ReadLine());
+                conta.Senha = Convert.ToInt32(Console.ReadLine());
             }
             catch (Exception)
             {
-                senha = 0;
+                conta.Senha = 0;
             }
 
-            if (baseDeDados.AutenticarUsuario(nrConta, senha))
+            contaLogada = baseDeDados.AutenticarUsuario(conta);
+            if (contaLogada != null)
             {
-                contaLogada = nrConta;
                 usuarioAutenticado = true;
                 Console.Clear();
             }
@@ -124,10 +123,10 @@ namespace CxMasterPlus
                     operacao.MenuExtrato(contaLogada, tela, baseDeDados);
                     break;
                 case 2:
-                    operacao.MenuSaque(contaLogada, tela, baseDeDados, compartimentoDeSaque);
+                    operacao.MenuSaque(contaLogada, tela, baseDeDados);
                     break;
                 case 3:
-                    operacao.MenuDeposito(contaLogada, tela, baseDeDados, compartimentoDeSaque);
+                    operacao.MenuDeposito(contaLogada, tela, baseDeDados);
                     break;
                 case 4:
                     operacao.MenuEmprestimo(contaLogada, tela, baseDeDados);

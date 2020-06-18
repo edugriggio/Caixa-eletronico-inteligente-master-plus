@@ -12,7 +12,7 @@ namespace CxMasterPlus
     {
         readonly Validadores validador = new Validadores();
 
-        public void MenuSaque(int contaLogada, Tela tela, BaseDeDados baseDeDados, CompartimentoDeSaque compartimentoDeSaque)
+        public void MenuSaque(Conta contaLogada, Tela tela, BaseDeDados baseDeDados)
         {
             int opcao = 0;
             int input = 0;
@@ -70,7 +70,7 @@ namespace CxMasterPlus
                 Validadores validador = new Validadores();
                 if (validador.ValidarUsuario(tela, contaLogada, baseDeDados))
                 {
-                    String mensagem = saque.EfetuarSaque(contaLogada, baseDeDados, input, compartimentoDeSaque);
+                    String mensagem = saque.EfetuarSaque(contaLogada, baseDeDados, input);
                     tela.ImprimirMensagem(mensagem);
                     Console.ReadKey();
                 }
@@ -89,7 +89,7 @@ namespace CxMasterPlus
             }
 
         }
-        public void MenuDeposito(int contaLogada, Tela tela, BaseDeDados baseDeDados, CompartimentoDeSaque compartimentoDeSaque)
+        public void MenuDeposito(Conta contaLogada, Tela tela, BaseDeDados baseDeDados)
         {
             int tipoDeposito = 0;
             int input;
@@ -113,7 +113,7 @@ namespace CxMasterPlus
                 switch (input)
                 {
                     case 1:
-                        if (baseDeDados.getTipoConta(contaLogada).Equals(1))
+                        if (contaLogada.TipoConta.Equals(1))
                         {
                             Console.Clear();
                             tela.ImprimirMensagem("Contas universitárias não podem efetuar depósito em cheque.");
@@ -158,7 +158,7 @@ namespace CxMasterPlus
                         Console.Clear();
                         Deposito deposito = new Deposito();
                         Console.Clear();
-                        String retornoDeposito = deposito.RealizarDeposito(contaLogada, baseDeDados, compartimentoDeSaque, tipoDeposito, input);
+                        String retornoDeposito = deposito.RealizarDeposito(contaLogada, baseDeDados, tipoDeposito, input);
                         Console.Clear();
                         tela.ImprimirMensagem(retornoDeposito);
                         Console.ReadKey();
@@ -173,7 +173,7 @@ namespace CxMasterPlus
                 }
             }
         }
-        public void MenuExtrato(int contaLogada, Tela tela, BaseDeDados baseDeDados)
+        public void MenuExtrato(Conta contaLogada, Tela tela, BaseDeDados baseDeDados)
         {
             int intervaloExtrato = 0;
             bool validaIntervalo = false;
@@ -218,7 +218,7 @@ namespace CxMasterPlus
             Console.ReadKey();
             Console.Clear();
         }
-        public void MenuEmprestimo(int contaLogada, Tela tela, BaseDeDados baseDeDados)
+        public void MenuEmprestimo(Conta contaLogada, Tela tela, BaseDeDados baseDeDados)
         {
             int inputMenu = 0;
 
@@ -265,13 +265,13 @@ namespace CxMasterPlus
             {
                 Emprestimo svEmprestimo = new Emprestimo();
                 valorMaxEmprestimo = baseDeDados.getVlrDispEmprestimo(contaLogada);
-                
+
                 if (valorMaxEmprestimo == 0)
                 {
                     Console.Clear();
                     tela.ImprimirMensagem("Sem limite para empréstimo.");
                     Console.ReadKey();
-                    Console.Clear();                  
+                    Console.Clear();
                 }
 
                 else
@@ -331,7 +331,7 @@ namespace CxMasterPlus
                                 }
                             }
                         }
-                    } 
+                    }
                 }
             }
             #endregion
@@ -340,60 +340,105 @@ namespace CxMasterPlus
             if (inputMenu == 2)
             {
                 PagamentoParcelas svPagamentoParcelas = new PagamentoParcelas();
-
+                Transacao selecionada = null;
                 int count = 1;
-                int contaMeses = 1;
                 int opcao;
+                int opcaoEmprestimo = 0;
 
-                //Busca lista de parcelas pagas
-                var listaParcelasPagas = baseDeDados.getHistoricoTransacoes(contaLogada)
-                                                .Where(x => x.Operacao.Contains(Enums.PagtoParcela)).ToList();
+                //Busca lista de parcelas A PAGAR
+                var emprestimo = baseDeDados.obterEmprestimo(contaLogada);
+                while (opcaoEmprestimo == 0)
+                {
+                    Console.Clear();
+                    tela.ImprimirMensagem("Lista de empréstimos: ");
+                    int i = 1;
+                    foreach (var emp in emprestimo)
+                    {
+                        tela.ImprimirMensagem("Emprestimo " + i);
+                        tela.ImprimirMensagem("Data: " + emp.DataTransacao);
+                        tela.ImprimirMensagem("Valor: R$" + emp.VlrTotalEmprestimo);
+                        tela.ImprimirMensagem("-----------------------------------");
+                        i++;
+                    }
+                    tela.ImprimirMensagem("Selecione um empréstimo (0 para cancelar): ");
+                    try
+                    {
+                        opcaoEmprestimo = int.Parse(Console.ReadLine());
+                        if (opcaoEmprestimo == 0)
+                        {
+                            Console.Clear();
+                            tela.ImprimirMensagem("Transação cancelada.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        }
+                        try
+                        {
+                            selecionada = emprestimo[opcaoEmprestimo-1];
+                            Console.Clear();
+                        }
+                        catch (Exception)
+                        {
+                            tela.ImprimirMensagem("Opção Inválida.");
+                            Console.ReadKey();
+                            opcaoEmprestimo = 0;
+                            Console.Clear();
+                        }
 
-                //Busca lista de parcelas abertas
-                var listaParcelasAbertas = baseDeDados.getHistoricoTransacoes(contaLogada)
-                                                .Where(x => x.Operacao.Contains(Enums.PagtoParcelaPrevisto)).ToList();
+                    }
+                    catch (Exception)
+                    {
+                        tela.ImprimirMensagem("Opção Inválida.");
+                        Console.ReadKey();
+                        opcaoEmprestimo = 0;
+                        Console.Clear();
+                    }
+                }
+
+                var listaParcelasAbertas = new List<Transacao>();
+                if (selecionada != null)
+                {
+
+                    for (int i = 1; i <= selecionada.ParcelasRestantes; i++)
+                    {
+                        listaParcelasAbertas.Add(new Transacao
+                        {
+                            Valor = selecionada.Valor,
+                            NrParcela = selecionada.NrParcela,
+                            VlrTotalEmprestimo = selecionada.VlrTotalEmprestimo,
+                            NrTotalParcelas = selecionada.NrTotalParcelas,
+                            ProximaParcela = selecionada.ProximaParcela,
+                            DataTransacao = selecionada.DataTransacao,
+                            Taxa = selecionada.Taxa,
+                            ParcelasRestantes = selecionada.ParcelasRestantes,
+                            Id = selecionada.Id
+                        });
+                        selecionada.ProximaParcela = selecionada.ProximaParcela.AddMonths(1);
+                        selecionada.NrParcela = selecionada.NrParcela + 1;
+                    }
+                }
                 //Verifica se existem parcelas de empréstimo
                 if (listaParcelasAbertas.Any())
                 {
-                    //Completa lista de parcelas previstas com parcelas futuras
-                    for (int i = listaParcelasPagas.Count; i < listaParcelasAbertas[0].NrTotalParcelas - 1; i++)
-                    {
-                        Transacao parcela = new Transacao(listaParcelasAbertas[0].DataTransacao.AddMonths(contaMeses),
-                                                            listaParcelasAbertas[0].Operacao,
-                                                            listaParcelasAbertas[0].Valor,
-                                                            listaParcelasAbertas[0].NrParcela + contaMeses,
-                                                            listaParcelasAbertas[0].VrTotalEmprestimo,
-                                                            listaParcelasAbertas[0].NrTotalParcelas);
-
-                        listaParcelasAbertas.Add(parcela);
-                        contaMeses++;
-                    }
-
-                    int nrTotalParcelas = Convert.ToInt32(listaParcelasAbertas[0].NrTotalParcelas);
+                    int nrTotalParcelas = Convert.ToInt32(selecionada.NrTotalParcelas);
 
                     #region Lista de parcelas
                     Console.Clear();
-                    tela.ImprimirMensagem("Parcelas pagas:");
-
-                    if (listaParcelasPagas.Any())
-                    {
-                        foreach (var parcela in listaParcelasPagas)
-                        {
-                            tela.ImprimirMensagem(String.Concat("Parcela ", parcela.NrParcela.ToString().PadLeft(2, '0'), "/", nrTotalParcelas.ToString().PadLeft(2, '0'), " - ", parcela.DataTransacao.ToString("dd/MM/yyyy"), " - ", parcela.Valor.ToString("C")));
-                        }
-                    }
-                    else
-                    {
-                        tela.ImprimirMensagem("Nenhuma parcela encontrada.");
-                    }
+                    tela.ImprimirMensagem("Empréstimo realizado em: " + selecionada.DataTransacao.ToShortDateString());
+                    double valor = (double)selecionada.VlrTotalEmprestimo;
+                    tela.ImprimirMensagem("Valor Solicitado: " + valor.ToString("C"));
+                    valor = selecionada.Valor * (int)selecionada.NrTotalParcelas;
+                    tela.ImprimirMensagem("Valor Total: " + valor.ToString("C"));
+                    tela.ImprimirMensagem("Número de Parcelas: " + selecionada.NrTotalParcelas.ToString());
+                    tela.ImprimirMensagem("Taxa de juros: " + selecionada.Taxa.ToString() + "%");
+                    tela.ImprimirMensagem("Total das Parcelas Restantes: " + (selecionada.Valor * selecionada.ParcelasRestantes).ToString("C"));
 
                     tela.ImprimirMensagem("\n--------------------------------------\n");
                     tela.ImprimirMensagem("Parcelas em aberto:");
 
                     foreach (var parcela in listaParcelasAbertas)
                     {
-                        tela.ImprimirMensagem(String.Concat("Parcela ", parcela.NrParcela.ToString().PadLeft(2, '0'), "/", nrTotalParcelas.ToString().PadLeft(2, '0'), " - ", parcela.DataTransacao.ToString("dd/MM/yyyy"), " - ", parcela.Valor.ToString("C")));
-                        count++;
+                        tela.ImprimirMensagem(String.Concat("Parcela ", parcela.NrParcela.ToString().PadLeft(2, '0'), "/", nrTotalParcelas.ToString().PadLeft(2, '0'), " - ", parcela.ProximaParcela.ToString("dd/MM/yyyy"), " - ", parcela.Valor.ToString("C")));
                     }
 
                     tela.ImprimirMensagem(String.Concat("\nDeseja pagar a ", listaParcelasAbertas[0].NrParcela, "ª parcela?"));

@@ -10,21 +10,20 @@ namespace CxMasterPlus
 
         private bool usuarioAutenticado = false;
         private int tentativas = 3;
-        private int senha;
-        public Boolean ValidarUsuario(Tela tela, int conta, BaseDeDados baseDeDados)
+        public Boolean ValidarUsuario(Tela tela, Conta conta, BaseDeDados baseDeDados)
         {
             while (!usuarioAutenticado && tentativas > 0)
             {
                 tela.ImprimirMensagem("Por favor, digite sua senha: ");
                 try
                 {
-                    senha = Convert.ToInt32(Console.ReadLine());
+                    conta.Senha = Convert.ToInt32(Console.ReadLine());
                 }
                 catch (Exception)
                 {
-                    senha = 0;
+                    conta.Senha = 0;
                 }
-                usuarioAutenticado = baseDeDados.AutenticarUsuario(conta, senha);
+                usuarioAutenticado = baseDeDados.AutenticarUsuario(conta) != null;
                 tentativas--;
                 if (!usuarioAutenticado && tentativas > 0)
                 {

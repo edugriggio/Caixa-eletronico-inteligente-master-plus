@@ -4,13 +4,12 @@ using System.Text;
 
 namespace CxMasterPlus
 {
-    class Enums
+    public enum Operacao
     {
-        //Tipo Transação
-        public const string Deposito = "Depósito";
-        public const string Emprestimo = "Empréstimo";
-        public const string Saque = "Saque";
-        public const string PagtoParcela = "Pagamento de parcela";
-        public const string PagtoParcelaPrevisto = "Pagamento previsto de parcela";
+        Deposito = '1',
+        Emprestimo = '2',
+        Saque = '3',
+        PagtoParcela = '4',
+        PagtoParcelaPrevisto = '5'
     }
 }

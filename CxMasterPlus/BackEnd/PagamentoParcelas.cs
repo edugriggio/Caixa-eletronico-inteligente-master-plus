@@ -12,16 +12,18 @@ namespace CxMasterPlus
             return novoValorParcela < saldoDisponivel ? true : false;
         }
 
-        public string RealizarPagamento(BaseDeDados baseDeDados, int nrConta, Transacao parcela)
+        public string RealizarPagamento(BaseDeDados baseDeDados, Conta conta, Transacao parcela)
         {
-            double vrTotalEmp = Convert.ToDouble(parcela.VrTotalEmprestimo);
-
+            double vrTotalEmp = Convert.ToDouble(parcela.VlrTotalEmprestimo);
+            double novoValorParcela = parcela.Valor;
             //Recalcula valor com novo juros
-            double novoValorTotal = vrTotalEmp + (vrTotalEmp * 0.02);
-            double novoValorParcela = novoValorTotal / Convert.ToDouble(parcela.NrTotalParcelas);
+            if (parcela.ProximaParcela > DateTime.Now)
+            {
+                novoValorParcela = (parcela.Valor / (1 + (parcela.Taxa / 100))) * 1.02;
+            }
 
             #region Valida se conta tem dinheiro suficiente para pagamento da parcela
-            double saldoDisponivel = baseDeDados.RetornaSaldoDisponivel(nrConta);
+            double saldoDisponivel = baseDeDados.obterConta(conta).ValorDisponivel;
 
             if (!VeririficaSaldoPagamento(novoValorParcela, saldoDisponivel))
             {
@@ -31,20 +33,16 @@ namespace CxMasterPlus
             #region Realiza pagamento
             else
             {
-                //Busca parcela a ser paga
-                var parcelaAPagar = baseDeDados.getHistoricoTransacoes(nrConta)
-                                                .Where(x => x.DataTransacao == parcela.DataTransacao).ToList();
-
                 //Efetua pagamento
-                baseDeDados.PagamentoParcela(nrConta, novoValorTotal, novoValorParcela, DateTime.Now, parcela.NrParcela, parcela.NrTotalParcelas);
+                if (baseDeDados.PagamentoParcela(conta, novoValorParcela, parcela, Operacao.PagtoParcela))
+                {
+                    return "Transação efetuada.";
+                }
+                else
+                {
+                    return "Problema ao realizar a operação. Tente novamente mais tarde.";
+                }
 
-                //Atualiza próxima parcela para o extrato
-                baseDeDados.AtualizaParcelaPrevista(nrConta, parcela);
-
-                //Adiciona limite de empréstimo na conta
-                baseDeDados.AdicionarLimiteEmprestimo(nrConta, vrTotalEmp);
-
-                return "Transação efetuada.";
             }
             #endregion
         }

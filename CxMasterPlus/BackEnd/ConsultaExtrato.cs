@@ -9,7 +9,7 @@ namespace CxMasterPlus
 {
     public class ConsultaExtrato : Aplicacao
     {
-        public Retorno<Extrato> GerarExtrato(int nrConta, BaseDeDados baseDeDados, Tela tela, int intervaloExtrato)
+        public Retorno<Extrato> GerarExtrato(Conta conta, BaseDeDados baseDeDados, Tela tela, int intervaloExtrato)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace CxMasterPlus
                 #endregion
 
                 #region RN2 - Apenas histórico no intervalo selecionado          
-                List<Transacao> historicoTransacoes = new List<Transacao>(baseDeDados.getHistoricoTransacoes(nrConta));
+                List<Transacao> historicoTransacoes = new List<Transacao>(baseDeDados.getHistoricoTransacoes(conta));
 
                 if (intervaloExtrato > 0)
                 {
@@ -30,7 +30,7 @@ namespace CxMasterPlus
                 }
                 #endregion
 
-                double valorDisponivel = baseDeDados.RetornaSaldoDisponivel(nrConta);        
+                double valorDisponivel = baseDeDados.RetornaSaldoDisponivel(conta);        
                 #endregion
 
                 Extrato extrato = new Extrato(valorDisponivel, historicoTransacoes);
